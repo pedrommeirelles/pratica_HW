@@ -2,6 +2,7 @@
 
 :root {
   --azul: #2A78D6;
+  --azul-texto: #2470CC; /* azul um pouco mais escuro: texto branco com contraste AA */
   --laranja: #EB6834;
   --cinza: #7A7974;
   --fundo: #FBFAF8;
@@ -180,9 +181,9 @@ button:disabled {
 }
 
 button.principal {
-  background: var(--azul);
+  background: var(--azul-texto);
   color: #FFFFFF;
-  border-color: var(--azul);
+  border-color: var(--azul-texto);
   font-weight: 600;
 }
 
@@ -381,7 +382,7 @@ tfoot td { font-weight: 600; border-bottom: none; }
   transition: border-color var(--duracao), transform var(--duracao);
 }
 
-.feijao.S { background: var(--azul); color: #FFFFFF; }
+.feijao.S { background: var(--azul-texto); color: #FFFFFF; }
 .feijao.R { background: var(--laranja); color: #1E1E1C; }
 
 .feijao.sorteado {
