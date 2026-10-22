@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prática de Hardy-Weinberg com Aedes aegypti. BIOC10 Genética II, UFBA.">
+  <title>Gametas ao acaso · BIOC10</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <h1>Gametas ao acaso</h1>
+    <p class="subtitulo">Hardy-Weinberg com <em>Aedes aegypti</em> · BIOC10 Genética II · Prática de 22/10/2026</p>
+    <nav class="barra" aria-label="Passos da prática">
+      <ol id="lista-passos">
+        <li><a href="#passo-1" data-passo="1">1 Previsão</a></li>
+        <li><a href="#passo-2" data-passo="2">2 Rodada 1</a></li>
+        <li><a href="#passo-3" data-passo="3">3 Rodada 2</a></li>
+        <li><a href="#passo-4" data-passo="4">4 Seu Aedes</a></li>
+        <li><a href="#passo-5" data-passo="5">5 Extra</a></li>
+        <li><a href="#passo-6" data-passo="6">6 Registro</a></li>
+      </ol>
+      <a href="#calculadora" class="calc" data-passo="calculadora">Calculadora</a>
+      <button type="button" id="botao-projecao" class="pequeno" aria-pressed="false" title="Modo projeção: fonte maior">A+</button>
+    </nav>
+  </header>
+
+  <main id="principal">
+
+    <!-- Passo 1 -->
+    <section class="tela" id="tela-passo-1" aria-labelledby="titulo-passo-1">
+      <h2 id="titulo-passo-1">1. Sua previsão</h2>
+      <p>Na Entrega 1, você leu o gel de 24 <em>Aedes aegypti</em> de uma cidade brasileira. Sem fazer contas: essa população está em equilíbrio de Hardy-Weinberg?</p>
+      <div class="grupo-botoes grande" role="group" aria-label="Sua previsão" id="botoes-previsao">
+        <button type="button" class="escolha" data-previsao="Sim" aria-pressed="false">Sim</button>
+        <button type="button" class="escolha" data-previsao="Não" aria-pressed="false">Não</button>
+        <button type="button" class="escolha" data-previsao="Não sei" aria-pressed="false">Não sei</button>
+      </div>
+      <p id="eco-previsao" class="suave" aria-live="polite"></p>
+      <label for="campo-nome">Seu nome (opcional: fica só neste aparelho e no seu registro)</label>
+      <input type="text" id="campo-nome" autocomplete="off" maxlength="80">
+      <div class="rodape-passo">
+        <div id="recomecar-1"></div>
+        <div class="direita">
+          <button type="button" class="principal" data-ir="#passo-2">Próximo: Rodada 1</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Passo 2 -->
+    <section class="tela" id="tela-passo-2" aria-labelledby="titulo-passo-2">
+      <h2 id="titulo-passo-2">2. Rodada 1: um saco de gametas</h2>
+      <p>O saco tem os gametas de Vitória (ES), 2006: 29 feijões S e 31 R.</p>
+      <p>Cada mosquito recebe 2 gametas, sorteados um de cada vez. O feijão volta para o saco depois de cada sorteio.</p>
+      <p><strong>Antes de sortear: que genótipo você espera ver mais?</strong></p>
+      <div class="grupo-botoes" role="group" aria-label="Genótipo mais esperado" id="botoes-palpite-1">
+        <button type="button" class="escolha" data-palpite="SS" aria-pressed="false">SS</button>
+        <button type="button" class="escolha" data-palpite="SR" aria-pressed="false">SR</button>
+        <button type="button" class="escolha" data-palpite="RR" aria-pressed="false">RR</button>
+      </div>
+      <p id="msg-palpite-1" class="nota" hidden></p>
+
+      <div class="recipiente">
+        <div class="titulo">Saco: Vitória (ES), 2006 (29 S, 31 R)</div>
+        <div class="grade" id="grade-saco" aria-hidden="true"></div>
+      </div>
+
+      <div class="gametas-pendentes" id="pendentes-1" aria-label="Gametas do mosquito atual"></div>
+      <p class="contador" id="contador-1">Mosquito 1 de 10</p>
+      <div class="grupo-botoes">
+        <button type="button" class="principal" id="botao-sortear-1">Sortear gameta</button>
+        <button type="button" id="botao-mais-90" hidden>Sortear mais 90</button>
+        <button type="button" id="botao-mais-900" hidden>Sortear mais 900</button>
+      </div>
+
+      <h3>Seus mosquitos</h3>
+      <div class="mosquitos" id="mosquitos-1"></div>
+      <p class="suave pequeno" id="total-1"></p>
+
+      <div class="resultado" id="resultado-1" aria-live="polite"></div>
+
+      <div class="rodape-passo">
+        <div id="recomecar-2"></div>
+        <div class="direita">
+          <button type="button" data-ir="#passo-1">Voltar</button>
+          <button type="button" class="principal" data-ir="#passo-3">Próximo: Rodada 2</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Passo 3 -->
+    <section class="tela" id="tela-passo-3" aria-labelledby="titulo-passo-3">
+      <h2 id="titulo-passo-3">3. Rodada 2: dois potes</h2>
+      <p>Agora há duas populações. Pote A: Caicó (RN), 2010, com 55 feijões S e 5 R. Pote B: Vitória (ES), 2010, com 5 S e 55 R.</p>
+      <p>Os dois gametas de cada mosquito saem do mesmo pote.</p>
+
+      <div class="duas-colunas">
+        <div class="recipiente">
+          <div class="titulo">Pote A: Caicó (RN), 2010 (55 S, 5 R)</div>
+          <div class="grade" id="grade-pote-a" aria-hidden="true"></div>
+          <p class="contador" id="contador-a">0 de 10 mosquitos</p>
+          <button type="button" class="principal" id="botao-sortear-a">Sortear mosquito do pote A</button>
+          <div class="mosquitos" id="mosquitos-a"></div>
+          <p class="suave pequeno" id="total-a"></p>
+        </div>
+        <div class="recipiente">
+          <div class="titulo">Pote B: Vitória (ES), 2010 (5 S, 55 R)</div>
+          <div class="grade" id="grade-pote-b" aria-hidden="true"></div>
+          <p class="contador" id="contador-b">0 de 10 mosquitos</p>
+          <button type="button" class="principal" id="botao-sortear-b">Sortear mosquito do pote B</button>
+          <div class="mosquitos" id="mosquitos-b"></div>
+          <p class="suave pequeno" id="total-b"></p>
+        </div>
+      </div>
+      <div class="grupo-botoes">
+        <button type="button" id="botao-mais-90-potes" hidden>Mais 90 em cada pote</button>
+      </div>
+
+      <div id="bloco-palpite-2" hidden>
+        <p><strong>Se você juntar os mosquitos dos dois potes numa amostra só, os heterozigotos (SR) vão:</strong></p>
+        <div class="grupo-botoes" role="group" aria-label="Previsão sobre os heterozigotos" id="botoes-palpite-2">
+          <button type="button" class="escolha" data-palpite="faltar" aria-pressed="false">faltar</button>
+          <button type="button" class="escolha" data-palpite="sobrar" aria-pressed="false">sobrar</button>
+          <button type="button" class="escolha" data-palpite="ficar como o esperado" aria-pressed="false">ficar como o esperado</button>
+        </div>
+        <div class="grupo-botoes">
+          <button type="button" class="principal" id="botao-juntar">Juntar as amostras</button>
+        </div>
+      </div>
+
+      <div class="resultado" id="resultado-2" aria-live="polite"></div>
+
+      <div class="rodape-passo">
+        <div id="recomecar-3"></div>
+        <div class="direita">
+          <button type="button" data-ir="#passo-2">Voltar</button>
+          <button type="button" class="principal" data-ir="#passo-4">Próximo: seu Aedes</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Passo 4 -->
+    <section class="tela" id="tela-passo-4" aria-labelledby="titulo-passo-4">
+      <h2 id="titulo-passo-4">4. O seu <em>Aedes aegypti</em></h2>
+      <p>Pegue a sua Entrega 1. Escolha a sua população e digite as contagens do gel (item 1.6).</p>
+      <label for="seletor-populacao">Sua população</label>
+      <select id="seletor-populacao">
+        <option value="">Escolha a população</option>
+      </select>
+
+      <div class="duas-colunas">
+        <div class="quadro">
+          <h3>Sítio 1016 (Val ou Ile)</h3>
+          <div class="campos">
+            <div><label for="c1016-0">Val/Val</label><input type="number" id="c1016-0" inputmode="numeric" min="0" step="1" data-sitio="1016" data-i="0"></div>
+            <div><label for="c1016-1">Val/Ile</label><input type="number" id="c1016-1" inputmode="numeric" min="0" step="1" data-sitio="1016" data-i="1"></div>
+            <div><label for="c1016-2">Ile/Ile</label><input type="number" id="c1016-2" inputmode="numeric" min="0" step="1" data-sitio="1016" data-i="2"></div>
+          </div>
+          <div class="resultado" id="resultado-1016" aria-live="polite"></div>
+        </div>
+        <div class="quadro">
+          <h3>Sítio 1534 (Phe ou Cys)</h3>
+          <div class="campos">
+            <div><label for="c1534-0">Phe/Phe</label><input type="number" id="c1534-0" inputmode="numeric" min="0" step="1" data-sitio="1534" data-i="0"></div>
+            <div><label for="c1534-1">Phe/Cys</label><input type="number" id="c1534-1" inputmode="numeric" min="0" step="1" data-sitio="1534" data-i="1"></div>
+            <div><label for="c1534-2">Cys/Cys</label><input type="number" id="c1534-2" inputmode="numeric" min="0" step="1" data-sitio="1534" data-i="2"></div>
+          </div>
+          <div class="resultado" id="resultado-1534" aria-live="polite"></div>
+        </div>
+      </div>
+      <div id="avisos-4"></div>
+
+      <div class="quadro" id="quadro-artigo" hidden>
+        <h3>E o artigo?</h3>
+        <p id="texto-artigo"></p>
+      </div>
+
+      <p id="linha-previsao-4" class="nota" hidden></p>
+      <p class="lembrete">Não rejeitar não prova o equilíbrio: com 24 mosquitos, desvios moderados passam despercebidos.</p>
+
+      <div class="rodape-passo">
+        <div id="recomecar-4"></div>
+        <div class="direita">
+          <button type="button" data-ir="#passo-3">Voltar</button>
+          <button type="button" data-ir="#passo-6">Ir para o registro</button>
+          <button type="button" class="principal" data-ir="#passo-5">Próximo: extra</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Passo 5 -->
+    <section class="tela" id="tela-passo-5" aria-labelledby="titulo-passo-5">
+      <h2 id="titulo-passo-5">5. Extra: o jeito do artigo</h2>
+      <p>Os sítios 1016 e 1534 ficam no mesmo gene e passam juntos para os filhos. Nas populações do artigo, Ile (1016) só aparece junto com Cys (1534). Por isso o artigo trata cada combinação como um alelo: S (Val + Phe), R1 (Val + Cys) e R2 (Ile + Cys).</p>
+      <p><strong>Digite os seis genótipos do item 1.7 da Entrega 1:</strong></p>
+      <div class="campos">
+        <div><label for="g-0">SS</label><input type="number" id="g-0" inputmode="numeric" min="0" step="1" data-gene="0"></div>
+        <div><label for="g-1">SR1</label><input type="number" id="g-1" inputmode="numeric" min="0" step="1" data-gene="1"></div>
+        <div><label for="g-2">SR2</label><input type="number" id="g-2" inputmode="numeric" min="0" step="1" data-gene="2"></div>
+        <div><label for="g-3">R1R1</label><input type="number" id="g-3" inputmode="numeric" min="0" step="1" data-gene="3"></div>
+        <div><label for="g-4">R1R2</label><input type="number" id="g-4" inputmode="numeric" min="0" step="1" data-gene="4"></div>
+        <div><label for="g-5">R2R2</label><input type="number" id="g-5" inputmode="numeric" min="0" step="1" data-gene="5"></div>
+      </div>
+      <p id="conferencia-5"></p>
+      <div class="resultado" id="resultado-5" aria-live="polite"></div>
+      <p class="nota">O teste por sítio não vê tudo: trocar um SR1 e um R1R2 por um SR2 e um R1R1 deixa os dois sítios iguais e muda os genótipos do gene.</p>
+      <details>
+        <summary>De onde vêm os genótipos de cada sítio</summary>
+        <ul>
+          <li>Val/Val = SS + SR1 + R1R1</li>
+          <li>Val/Ile = SR2 + R1R2</li>
+          <li>Ile/Ile = R2R2</li>
+          <li>Phe/Phe = SS</li>
+          <li>Phe/Cys = SR1 + SR2</li>
+          <li>Cys/Cys = R1R1 + R1R2 + R2R2</li>
+        </ul>
+      </details>
+      <div class="rodape-passo">
+        <div id="recomecar-5"></div>
+        <div class="direita">
+          <button type="button" data-ir="#passo-4">Voltar</button>
+          <button type="button" class="principal" data-ir="#passo-6">Próximo: registro</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Passo 6 -->
+    <section class="tela" id="tela-passo-6" aria-labelledby="titulo-passo-6">
+      <h2 id="titulo-passo-6">6. Meu registro</h2>
+      <p>Seu registro fica salvo neste aparelho. Copie ou baixe antes de fechar. Às 10h30, responda a ficha de saída no Moodle.</p>
+      <pre class="registro" id="texto-registro" tabindex="0"></pre>
+      <div class="grupo-botoes acoes-registro">
+        <button type="button" class="principal" id="botao-copiar">Copiar</button>
+        <button type="button" id="botao-baixar">Baixar (.txt)</button>
+        <button type="button" id="botao-imprimir">Imprimir</button>
+        <a class="botao" id="link-moodle" href="#" target="_blank" rel="noopener" hidden>Abrir o Moodle</a>
+      </div>
+      <p id="msg-registro" class="suave" aria-live="polite"></p>
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita">
+          <button type="button" data-ir="#passo-5">Voltar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculadora -->
+    <section class="tela" id="tela-calculadora" aria-labelledby="titulo-calculadora">
+      <h2 id="titulo-calculadora">Calculadora de Hardy-Weinberg (dois alelos)</h2>
+      <p>Digite as contagens dos três genótipos: os dois homozigotos e o heterozigoto.</p>
+      <div class="campos">
+        <div><label for="calc-0">Homozigoto A1A1</label><input type="number" id="calc-0" inputmode="numeric" min="0" step="1" data-calc="0"></div>
+        <div><label for="calc-1">Heterozigoto A1A2</label><input type="number" id="calc-1" inputmode="numeric" min="0" step="1" data-calc="1"></div>
+        <div><label for="calc-2">Homozigoto A2A2</label><input type="number" id="calc-2" inputmode="numeric" min="0" step="1" data-calc="2"></div>
+      </div>
+      <div class="resultado" id="resultado-calc" aria-live="polite"></div>
+      <div class="rodape-passo">
+        <div><button type="button" id="botao-limpar-calc">Limpar</button></div>
+        <div class="direita">
+          <button type="button" id="botao-voltar-calc">Voltar ao passo</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p>Dados: Linss et al. (2014), Parasites &amp; Vectors 7:25, Tabela 3. BIOC10 Genética II, Instituto de Biologia, UFBA. Prof. Pedro Milet Meirelles.</p>
+  </footer>
+</div>
+
+<script src="js/dados.js"></script>
+<script src="js/hw.js"></script>
+<script src="js/sorteio.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
