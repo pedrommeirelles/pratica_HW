@@ -278,6 +278,10 @@ input[type="number"] { max-width: 9rem; }
 
 .duas-colunas > * { min-width: 0; }
 
+/* Quadros um embaixo do outro em todas as larguras (Passo 4) */
+.empilhado { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
+.empilhado > * { min-width: 0; }
+
 @media (max-width: 600px) {
   .duas-colunas { grid-template-columns: 1fr; }
 }
