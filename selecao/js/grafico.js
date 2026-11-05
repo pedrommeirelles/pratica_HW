@@ -94,7 +94,7 @@ var GRAFICO = (function () {
       var cx = X(mk.x), cy = Y(mk.y);
       s.push('<circle class="marca ' + (mk.classe || '') + '" cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + (mk.raio || 6) + '"/>');
       if (mk.rotulo) {
-        var ancora = cx > m.e + lx * 0.8 ? 'end' : 'start';
+        var ancora = mk.ancora || (cx > m.e + lx * 0.8 ? 'end' : 'start');
         var dx = ancora === 'end' ? -10 : 10;
         var yy = cy + (mk.abaixo ? 20 : -10);
         s.push('<text class="marca-texto" x="' + (cx + dx).toFixed(1) + '" y="' + yy.toFixed(1) + '" text-anchor="' + ancora + '">' + esc(mk.rotulo) + '</text>');

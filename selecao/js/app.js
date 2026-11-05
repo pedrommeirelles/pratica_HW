@@ -314,7 +314,7 @@
       y: { min: 0, max: 1, ticks: [0, 0.25, 0.5, 0.75, 1], rotulo: 'Frequência do kdr (p)' },
       series: [{ pontos: c.traj.map(function (p, g) { return [r2.inicio + g / r2.G, p]; }), classe: 'r', traco: 'cheio' }],
       marcas: serie.pontos.map(function (pt) {
-        return { x: pt.ano, y: pt.p, rotulo: pt.ano + ': ' + num(pt.p, 3), abaixo: pt.p > 0.8 };
+        return { x: pt.ano, y: pt.p, rotulo: pt.ano + ': ' + num(pt.p, 3), abaixo: pt.p > 0.8, ancora: (r2.serie === 'AJU' && pt.ano >= 2010) ? 'end' : undefined };
       }),
       descricao: serie.rotulo + ': pontos observados e curva com s ' + num(r2.s, 3)
     });
