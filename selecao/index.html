@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prática de seleção natural com Aedes aegypti e o kdr. BIOC10 Genética II, UFBA.">
+  <title>Fumacê e seleção · BIOC10</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/selecao.css">
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <h1>Fumacê e seleção</h1>
+    <p class="subtitulo">Seleção natural com <i>Aedes aegypti</i> · BIOC10 Genética II · Prática de 05/11/2026</p>
+    <nav class="barra" aria-label="Passos da prática">
+      <ol id="lista-passos">
+        <li><a href="#passo-1" data-passo="1">1 Previsão</a></li>
+        <li><a href="#passo-2" data-passo="2">2 Inseticida</a></li>
+        <li><a href="#passo-3" data-passo="3">3 Acerte a curva</a></li>
+        <li><a href="#passo-4" data-passo="4">4 Fumacê para</a></li>
+        <li><a href="#passo-5" data-passo="5">5 Heterozigoto</a></li>
+        <li><a href="#passo-6" data-passo="6">6 Blog</a></li>
+        <li><a href="#passo-7" data-passo="7">7 Registro</a></li>
+      </ol>
+      <button type="button" id="botao-projecao" class="pequeno" aria-pressed="false" title="Modo projeção: fonte maior">A+</button>
+    </nav>
+  </header>
+
+  <main id="principal">
+
+    <!-- Passo 1 -->
+    <section class="tela" id="tela-passo-1" aria-labelledby="titulo-passo-1">
+      <h2 id="titulo-passo-1">1. Sua previsão</h2>
+      <p class="horario">9h00 a 9h05</p>
+      <p>Em Aracaju (SE), o alelo <i>kdr</i>, que torna o <i>Aedes aegypti</i> resistente aos piretroides do fumacê, passou de 0% dos alelos em 2002 para 62% em 2012 (Linss et al., 2014). Hoje você vai medir a força da seleção que fez isso e prever o que acontece quando o inseticida para. As contas ficam com o aplicativo: você prevê, ajusta, observa e interpreta.</p>
+      <div class="nota">O estudo dirigido de 03/11 é terminado hoje, dentro da prática. Deixe o seu arquivo aberto: o aplicativo avisa a hora de cada questão.</div>
+
+      <h3>a) Quando R ainda é raro (1 em cada 100 alelos), que tipo de alelo R se espalha mais depressa com o inseticida?</h3>
+      <div class="grupo-botoes" role="group" aria-label="Previsão a" id="botoes-prev-a">
+        <button type="button" class="escolha" data-valor="R dominante" aria-pressed="false">R dominante</button>
+        <button type="button" class="escolha" data-valor="R intermediário" aria-pressed="false">R intermediário</button>
+        <button type="button" class="escolha" data-valor="R recessivo" aria-pressed="false">R recessivo</button>
+        <button type="button" class="escolha" data-valor="Tanto faz" aria-pressed="false">Tanto faz</button>
+      </div>
+
+      <h3>b) Se todo uso de piretroide parasse hoje, em quanto tempo o <i>kdr</i> de Aracaju (62% em 2012) voltaria a 10%?</h3>
+      <div class="grupo-botoes" role="group" aria-label="Previsão b" id="botoes-prev-b">
+        <button type="button" class="escolha" data-valor="Menos de 1 ano" aria-pressed="false">Menos de 1 ano</button>
+        <button type="button" class="escolha" data-valor="1 a 3 anos" aria-pressed="false">1 a 3 anos</button>
+        <button type="button" class="escolha" data-valor="3 a 10 anos" aria-pressed="false">3 a 10 anos</button>
+        <button type="button" class="escolha" data-valor="Mais de 10 anos" aria-pressed="false">Mais de 10 anos</button>
+        <button type="button" class="escolha" data-valor="Nunca" aria-pressed="false">Nunca</button>
+      </div>
+      <p id="eco-previsao" class="suave" aria-live="polite"></p>
+
+      <label for="campo-nome">Seu nome (opcional: fica só neste aparelho e no seu registro)</label>
+      <input type="text" id="campo-nome" autocomplete="off" maxlength="80">
+      <div class="rodape-passo">
+        <div id="recomecar-tudo"></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-2">Próximo: com inseticida</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 2 -->
+    <section class="tela" id="tela-passo-2" aria-labelledby="titulo-passo-2">
+      <h2 id="titulo-passo-2">2. Rodada 1: com inseticida</h2>
+      <p class="horario">9h05 a 9h17</p>
+      <div class="quadro">
+        <h3>Como a seleção entra na conta</h3>
+        <p><strong>Aptidão (<i>w</i>)</strong>: o quanto cada genótipo deixa de descendentes, em relação ao mais apto. Com o piretroide, o RR é o mais apto: <i>w</i><sub>RR</sub> = 1 e <i>w</i><sub>SS</sub> = 1 − <i>s</i>, em que <i>s</i> é o <strong>coeficiente de seleção</strong>.</p>
+        <p>O heterozigoto depende da <strong>dominância de R (<i>h</i>)</strong>: <i>w</i><sub>RS</sub> = 1 − (1 − <i>h</i>) <i>s</i>. Com <i>h</i> = 1, o RS resiste como o RR (R dominante); com <i>h</i> = 0,5, fica no meio; com <i>h</i> = 0, sofre como o SS (R recessivo).</p>
+      </div>
+
+      <div class="controles">
+        <div class="controle">
+          <label for="r1-p0">Frequência inicial de R (<i>p</i><sub>0</sub>): <output id="r1-p0-valor"></output></label>
+          <input type="range" id="r1-p0" min="0.01" max="0.5" step="0.01">
+        </div>
+        <div class="controle">
+          <label for="r1-s">Coeficiente de seleção (<i>s</i>): <output id="r1-s-valor"></output></label>
+          <input type="range" id="r1-s" min="0.05" max="0.9" step="0.05">
+        </div>
+      </div>
+      <p class="rotulo-grupo">Dominância de R</p>
+      <div class="grupo-botoes" role="group" aria-label="Dominância de R" id="r1-h">
+        <button type="button" class="escolha" data-h="1" aria-pressed="false">R dominante (<i>h</i> = 1)</button>
+        <button type="button" class="escolha" data-h="0.5" aria-pressed="false">Intermediário (<i>h</i> = 0,5)</button>
+        <button type="button" class="escolha" data-h="0" aria-pressed="false">R recessivo (<i>h</i> = 0)</button>
+      </div>
+      <p class="pequeno suave">Sugestão para começar: <i>p</i><sub>0</sub> = 0,05 e <i>s</i> = 0,30 (o slide 8 usou 0,01 e 0,20).</p>
+
+      <div class="grafico-caixa" id="r1-grafico"></div>
+      <div class="grupo-botoes">
+        <button type="button" id="r1-comparar" aria-pressed="false">Comparar os três tipos de R</button>
+      </div>
+
+      <h3>Uma geração de cada vez</h3>
+      <p class="pequeno suave">A conta que o aplicativo faz: cada genótipo entra com a sua frequência, é multiplicado pela aptidão e o total é dividido pela aptidão média, <span class="media">w</span>.</p>
+      <div class="tabela-rolagem" id="r1-tabela"></div>
+      <p id="r1-resumo" class="resultado" aria-live="polite"></p>
+      <div class="grupo-botoes">
+        <button type="button" class="principal" id="r1-proxima">Próxima geração</button>
+        <button type="button" id="r1-mais10">Mais 10 gerações</button>
+        <button type="button" id="r1-zerar">Voltar à geração 0</button>
+      </div>
+
+      <h3>Responda (um toque)</h3>
+      <div class="pergunta" id="r1-q1">
+        <p><strong>2.1</strong> Com <i>p</i><sub>0</sub> = 0,05 e <i>s</i> = 0,30, compare os três tipos. Qual curva sai do chão primeiro?</p>
+        <div class="grupo-botoes" role="group" aria-label="Pergunta 2.1">
+          <button type="button" class="escolha" data-valor="R dominante" aria-pressed="false">R dominante</button>
+          <button type="button" class="escolha" data-valor="R intermediário" aria-pressed="false">R intermediário</button>
+          <button type="button" class="escolha" data-valor="R recessivo" aria-pressed="false">R recessivo</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="r1-q2">
+        <p><strong>2.2</strong> E no fim: qual curva custa mais a chegar perto de 100%?</p>
+        <div class="grupo-botoes" role="group" aria-label="Pergunta 2.2">
+          <button type="button" class="escolha" data-valor="R dominante" aria-pressed="false">R dominante</button>
+          <button type="button" class="escolha" data-valor="R intermediário" aria-pressed="false">R intermediário</button>
+          <button type="button" class="escolha" data-valor="R recessivo" aria-pressed="false">R recessivo</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="r1-q3">
+        <p><strong>2.3</strong> Por que o R recessivo demora a decolar?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="Pergunta 2.3">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Quase todo R está em heterozigotos, que morrem como os SS</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">O inseticida não age sobre o R recessivo</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Ele depende de novas mutações</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="pare" id="ed-q1">
+        <p class="pare-titulo">Pare aqui: estudo dirigido, Questão 1 (cerca de 8 min)</p>
+        <p>A Rodada 1 foi seleção <strong>direcional</strong> num gene: um alelo sobe sempre. A Questão 1 leva a ideia a um caráter contínuo, como tamanho, peso e bico.</p>
+        <p class="pequeno">Leia: Ridley 4, p. 6 a 8 [106 a 108], seção 4.4 e Figura 4.2. Consulte, se precisar: Figuras 4.3 a 4.5; slide 10.</p>
+        <button type="button" class="pequeno feito-ed" data-ed="q1" aria-pressed="false">Terminei a Questão 1</button>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-3">Próximo: acerte a curva</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 3 -->
+    <section class="tela" id="tela-passo-3" aria-labelledby="titulo-passo-3">
+      <h2 id="titulo-passo-3">3. Rodada 2: acerte a curva</h2>
+      <p class="horario">9h25 a 9h40</p>
+      <p>Os pontos são dados reais da Tabela 3 de Linss et al. (2014): a frequência dos alelos <i>kdr</i> (R1 + R2) em cada ano de coleta. Ajuste o <i>s</i> até a curva passar pelo ponto final.</p>
+
+      <p class="rotulo-grupo">Cidade</p>
+      <div class="grupo-botoes" role="group" aria-label="Cidade" id="r2-serie">
+        <button type="button" class="escolha" data-serie="AJU" aria-pressed="false">Aracaju (SE)</button>
+        <button type="button" class="escolha" data-serie="VIT" aria-pressed="false">Vitória (ES)</button>
+        <button type="button" class="escolha" data-serie="MSR" aria-pressed="false">Mossoró (RN), desafio</button>
+      </div>
+      <div id="r2-inicio-caixa">
+        <p class="rotulo-grupo">A curva começa em</p>
+        <div class="grupo-botoes" role="group" aria-label="Ano de início" id="r2-inicio">
+          <button type="button" class="escolha" data-inicio="2006" aria-pressed="false">2006 (vai até 2012)</button>
+          <button type="button" class="escolha" data-inicio="2010" aria-pressed="false">2010 (vai até 2012)</button>
+        </div>
+      </div>
+
+      <div class="quadro premissa">
+        <label for="r2-G">Premissa: gerações por ano: <output id="r2-G-valor"></output></label>
+        <input type="range" id="r2-G" min="6" max="20" step="1">
+        <p class="pequeno suave">Não existe um número exato. Do ovo ao adulto, o <i>Aedes</i> leva de 8 a 10 dias (slide 5 de 03/11), mas uma geração inteira inclui a vida adulta e a postura, e o ritmo muda com o calor e a chuva. Usamos 10 por ano como ponto de partida.</p>
+      </div>
+
+      <p class="rotulo-grupo">Dominância de R</p>
+      <div class="grupo-botoes" role="group" aria-label="Dominância de R" id="r2-h">
+        <button type="button" class="escolha" data-h="1" aria-pressed="false">Dominante</button>
+        <button type="button" class="escolha" data-h="0.5" aria-pressed="false">Intermediário</button>
+        <button type="button" class="escolha" data-h="0" aria-pressed="false">Recessivo</button>
+      </div>
+
+      <div class="controle">
+        <label for="r2-s">Coeficiente de seleção (<i>s</i>): <output id="r2-s-valor"></output></label>
+        <div class="linha-ajuste">
+          <button type="button" class="pequeno" id="r2-menos" aria-label="Diminuir s em 0,001">−</button>
+          <input type="range" id="r2-s" min="0" max="0.6" step="0.001">
+          <button type="button" class="pequeno" id="r2-mais" aria-label="Aumentar s em 0,001">+</button>
+        </div>
+      </div>
+
+      <div class="grafico-caixa" id="r2-grafico"></div>
+      <p id="r2-retorno" class="resultado" aria-live="polite"></p>
+      <div id="r2-quadro-s" class="quadro pequeno"></div>
+
+      <div id="r2-perguntas">
+        <h3>Responda (um toque)</h3>
+        <div class="pergunta" id="r2-q1">
+          <p><strong>3.1</strong> Em Aracaju, com a curva começando em 2006 e acertando 2012: o que ela faz em 2010 (observado 0,558)?</p>
+          <div class="grupo-botoes" role="group" aria-label="Pergunta 3.1">
+            <button type="button" class="escolha" data-valor="Passa perto" aria-pressed="false">Passa perto</button>
+            <button type="button" class="escolha" data-valor="Fica abaixo" aria-pressed="false">Fica abaixo</button>
+            <button type="button" class="escolha" data-valor="Fica acima" aria-pressed="false">Fica acima</button>
+          </div>
+          <p class="retorno" hidden></p>
+        </div>
+        <div class="pergunta" id="r2-q2">
+          <p><strong>3.2</strong> Comece a curva em 2010 e acerte 2012. Compare os dois <i>s</i>. O que pode explicar a diferença?</p>
+          <div class="grupo-botoes coluna" role="group" aria-label="Pergunta 3.2">
+            <button type="button" class="escolha" data-valor="a" aria-pressed="false">A pressão de seleção mudou ao longo do tempo</button>
+            <button type="button" class="escolha" data-valor="b" aria-pressed="false">Acaso da amostra: só 26 a 30 mosquitos por ano</button>
+            <button type="button" class="escolha" data-valor="c" aria-pressed="false">As duas coisas podem ter contribuído</button>
+            <button type="button" class="escolha" data-valor="d" aria-pressed="false">Novas mutações a partir de 2010</button>
+          </div>
+          <p class="retorno" hidden></p>
+        </div>
+        <div class="nota" id="r2-artigo" hidden>
+          <strong>O que diz o artigo.</strong> O programa nacional de controle da dengue usou piretroide no fumacê de 2001 a 2009 (Linss et al., 2014, Discussão). E os piretroides continuam muito usados dentro e em volta das casas (Introdução). Em Aracaju, o <i>kdr</i> continuou subindo depois de 2010, mas bem mais devagar.
+        </div>
+        <div class="pergunta" id="r2-q3">
+          <p><strong>3.3</strong> Mude a premissa de 10 para 20 gerações por ano e acerte Aracaju de novo. O <i>s</i> que acerta a curva...</p>
+          <div class="grupo-botoes" role="group" aria-label="Pergunta 3.3">
+            <button type="button" class="escolha" data-valor="Cai mais ou menos pela metade" aria-pressed="false">Cai mais ou menos pela metade</button>
+            <button type="button" class="escolha" data-valor="Dobra" aria-pressed="false">Dobra</button>
+            <button type="button" class="escolha" data-valor="Não muda" aria-pressed="false">Não muda</button>
+          </div>
+          <p class="retorno" hidden></p>
+        </div>
+        <p class="pequeno suave">Depois, volte para 10 gerações por ano e, se der tempo, acerte Vitória (2006 a 2010).</p>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-4">Próximo: o fumacê para</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 4 -->
+    <section class="tela" id="tela-passo-4" aria-labelledby="titulo-passo-4">
+      <h2 id="titulo-passo-4">4. Rodada 3: o fumacê para</h2>
+      <p class="horario">9h40 a 9h50</p>
+      <div class="quadro">
+        <h3>As gaiolas sem inseticida</h3>
+        <p>Smith et al. (2021) cruzaram mosquitos com <i>kdr</i> (linhagem KR, mutações S989P e V1016G, que não são as do Brasil) com mosquitos sem <i>kdr</i> e criaram os descendentes sem inseticida. Em quatro gaiolas, a frequência média do <i>kdr</i> caiu de 0,46 (geração F1) para 0,32 (F9): oito gerações.</p>
+        <p>Sem inseticida, quem paga é o R: <i>w</i><sub>SS</sub> = 1, <i>w</i><sub>RR</sub> = 1 − <i>c</i>, em que <i>c</i> é o <strong>custo da resistência</strong>.</p>
+      </div>
+
+      <p class="rotulo-grupo">Quanto do custo o heterozigoto paga?</p>
+      <div class="grupo-botoes" role="group" aria-label="Custo no heterozigoto" id="r3-hc">
+        <button type="button" class="escolha" data-hc="0" aria-pressed="false">Nada (só o RR paga)</button>
+        <button type="button" class="escolha" data-hc="0.5" aria-pressed="false">Metade</button>
+        <button type="button" class="escolha" data-hc="1" aria-pressed="false">Tudo (como o RR)</button>
+      </div>
+      <div class="controle">
+        <label for="r3-c">Custo (<i>c</i>): <output id="r3-c-valor"></output></label>
+        <div class="linha-ajuste">
+          <button type="button" class="pequeno" id="r3-menos" aria-label="Diminuir c em 0,001">−</button>
+          <input type="range" id="r3-c" min="0" max="0.4" step="0.001">
+          <button type="button" class="pequeno" id="r3-mais" aria-label="Aumentar c em 0,001">+</button>
+        </div>
+      </div>
+      <div class="grafico-caixa" id="r3-grafico-gaiola"></div>
+      <p id="r3-retorno" class="resultado" aria-live="polite"></p>
+
+      <h3>E Aracaju, se todo piretroide parasse em 2012?</h3>
+      <p>Antes de ver: com o custo que você achou, quantas gerações para o <i>kdr</i> de Aracaju ir de 0,617 a 0,10?</p>
+      <div class="grupo-botoes" role="group" aria-label="Palpite de gerações" id="r3-palpite">
+        <button type="button" class="escolha" data-valor="Menos de 10" aria-pressed="false">Menos de 10</button>
+        <button type="button" class="escolha" data-valor="10 a 30" aria-pressed="false">10 a 30</button>
+        <button type="button" class="escolha" data-valor="30 a 100" aria-pressed="false">30 a 100</button>
+        <button type="button" class="escolha" data-valor="Mais de 100" aria-pressed="false">Mais de 100</button>
+      </div>
+      <div id="r3-volta" hidden>
+        <div class="grafico-caixa" id="r3-grafico-volta"></div>
+        <p id="r3-volta-texto" class="resultado" aria-live="polite"></p>
+        <div class="grupo-botoes">
+          <button type="button" id="r3-comparar" aria-pressed="false">Comparar quem paga o custo</button>
+        </div>
+        <p id="r3-comparar-texto" class="pequeno" hidden></p>
+      </div>
+
+      <div class="pergunta" id="r3-q1">
+        <p><strong>4.1</strong> Por que o <i>kdr</i> cai quando o inseticida para?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="Pergunta 4.1">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Sem inseticida, quem tem <i>kdr</i> deixa menos descendentes (custo)</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">O inseticida deixa de causar a mutação</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Os mosquitos perdem a resistência ao longo da vida</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="pare" id="ed-q2">
+        <p class="pare-titulo">Pare aqui: estudo dirigido, Questão 2 (cerca de 8 min)</p>
+        <p>A aptidão de um genótipo depende do ambiente: o <i>kdr</i> ganha com inseticida e perde sem ele. A mariposa sarapintada passou por algo parecido com a poluição do ar.</p>
+        <p class="pequeno">Leia: Ridley 5, p. 14 e 15 [138 e 139] e p. 20 [144], Figura 5.6; o resumo do artigo no seu arquivo. Consulte, se precisar: p. 18 a 20 [142 a 144]; slide 9.</p>
+        <button type="button" class="pequeno feito-ed" data-ed="q2" aria-pressed="false">Terminei a Questão 2</button>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-5">Próximo: o heterozigoto</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 5 -->
+    <section class="tela" id="tela-passo-5" aria-labelledby="titulo-passo-5">
+      <h2 id="titulo-passo-5">5. Quando o heterozigoto é o mais apto</h2>
+      <p class="horario">9h58 a 10h01, depois a Questão 3</p>
+      <p>Até aqui, um homozigoto era sempre o mais apto, e a seleção empurrava um alelo para cima. E se o heterozigoto for o mais apto (sobredominância, slide 11)? Aqui os alelos são genéricos, A<sub>1</sub> e A<sub>2</sub>: <i>w</i><sub>A1A1</sub> = 1 − <i>s</i>, <i>w</i><sub>A1A2</sub> = 1 e <i>w</i><sub>A2A2</sub> = 1 − <i>t</i>.</p>
+      <div class="controles">
+        <div class="controle">
+          <label for="het-s">Desvantagem de A<sub>1</sub>A<sub>1</sub> (<i>s</i>): <output id="het-s-valor"></output></label>
+          <input type="range" id="het-s" min="0.05" max="0.9" step="0.05">
+        </div>
+        <div class="controle">
+          <label for="het-t">Desvantagem de A<sub>2</sub>A<sub>2</sub> (<i>t</i>): <output id="het-t-valor"></output></label>
+          <input type="range" id="het-t" min="0.05" max="0.9" step="0.05">
+        </div>
+      </div>
+      <div class="grafico-caixa" id="het-grafico"></div>
+      <p id="het-texto" class="resultado" aria-live="polite"></p>
+      <div class="pergunta" id="het-q1">
+        <p><strong>5.1</strong> Com o heterozigoto mais apto, o que acontece com a frequência de A<sub>1</sub>?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="Pergunta 5.1">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Vai para um valor intermediário e fica lá, de qualquer ponto de partida</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Vai sempre a 100%</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Depende só de onde começou</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pare" id="ed-q3">
+        <p class="pare-titulo">Pare aqui: estudo dirigido, Questão 3 (cerca de 7 min)</p>
+        <p>Dois casos reais em que o heterozigoto leva vantagem: a hemoglobina S em Ibadã e os carneiros Soay.</p>
+        <p class="pequeno">Leia: Ridley 5, p. 29 a 32 [153 a 156], seção 5.12 e Tabela 5.9; Pierce 25, p. 28 e 29; o resumo do artigo no seu arquivo. Consulte, se precisar: Figura 5.9, p. 31 [155]; slide 11.</p>
+        <button type="button" class="pequeno feito-ed" data-ed="q3" aria-pressed="false">Terminei a Questão 3</button>
+      </div>
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-6">Próximo: para o blog</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 6 -->
+    <section class="tela" id="tela-passo-6" aria-labelledby="titulo-passo-6">
+      <h2 id="titulo-passo-6">6. Para o blog: Questão 4a</h2>
+      <p class="horario">10h08 a 10h17</p>
+      <div class="pare" id="ed-q4">
+        <p class="pare-titulo">Estudo dirigido, Questão 4a (cerca de 9 min)</p>
+        <p>Escreva no seu arquivo o parágrafo de quatro a seis frases para o leitor do Darwinianas: por que o fumacê pode deixar de funcionar, e por que a resistência pode diminuir quando o inseticida para?</p>
+        <p class="pequeno">Leia: slides 7 a 9; Ridley 5, p. 21 a 24 [145 a 148], seção 5.8. Consulte, se precisar: Ridley 5, p. 23 [147].</p>
+        <button type="button" class="pequeno feito-ed" data-ed="q4a" aria-pressed="false">Terminei a Questão 4a</button>
+      </div>
+      <div class="quadro">
+        <h3>Seus números de hoje</h3>
+        <div id="blog-numeros"></div>
+        <p class="pequeno suave">O <i>s</i>, o custo e o tempo de volta são estimativas suas, feitas com premissas (gerações por ano, dominância). Se usar algum no texto, diga que é uma estimativa.</p>
+      </div>
+      <div class="quadro">
+        <h3>Dados com fonte que você pode citar</h3>
+        <ul>
+          <li>Em Aracaju, o <i>kdr</i> foi de 0 (2002) a 0,617 dos alelos (2012) (Linss et al., 2014).</li>
+          <li>Em gaiolas sem inseticida, o <i>kdr</i> caiu de 0,46 para 0,32 em oito gerações (Smith et al., 2021).</li>
+          <li>O fumacê usou piretroide de 2001 a 2009 (Linss et al., 2014).</li>
+        </ul>
+      </div>
+      <h3>Antes de entregar, confira (um toque em cada)</h3>
+      <div class="grupo-botoes coluna" id="blog-criterios">
+        <button type="button" class="escolha" data-crit="0" aria-pressed="false">(1) A seleção natural está explicada sem jargão, ou o termo é definido na primeira vez</button>
+        <button type="button" class="escolha" data-crit="1" aria-pressed="false">(2) Há pelo menos um dado com a fonte</button>
+        <button type="button" class="escolha" data-crit="2" aria-pressed="false">(3) O texto não diz que o inseticida cria a resistência</button>
+      </div>
+      <div class="nota">A Questão 4b fica para os 20 min da Avaliação III (10h20): com a sua equipe, digam onde a seleção pode agir no tema de vocês, que forma ela tem e que dado mostraria isso. Cada um escreve a 4b com as próprias palavras.</div>
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-7">Próximo: registro</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 7 -->
+    <section class="tela" id="tela-passo-7" aria-labelledby="titulo-passo-7">
+      <h2 id="titulo-passo-7">7. Seu registro</h2>
+      <p class="horario">10h17 a 10h20</p>
+      <p>O registro fica salvo neste aparelho. Copie ou baixe, se quiser guardar. Na ficha de saída do Moodle, você vai precisar do <i>s</i> de Aracaju (Rodada 2, de 2006 a 2012, R intermediário, 10 gerações por ano).</p>
+      <pre class="registro" id="registro-texto"></pre>
+      <div class="grupo-botoes acoes-registro">
+        <button type="button" class="principal" id="botao-copiar">Copiar o registro</button>
+        <button type="button" id="botao-baixar">Baixar como .txt</button>
+        <a class="botao" id="botao-moodle" href="#" target="_blank" rel="noopener" hidden>Abrir a ficha de saída</a>
+      </div>
+      <p id="msg-copiar" class="suave" aria-live="polite"></p>
+      <div class="nota">Entregue o estudo dirigido (PDF) na tarefa do Moodle até hoje, 05/11, às 23h59. A ficha de saída é feita agora, em sala.</div>
+      <div class="rodape-passo">
+        <div id="recomecar-fim"></div>
+        <div class="direita"><button type="button" data-ir="#passo-1">Voltar ao início</button></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p><strong>Fontes.</strong> Linss JGB et al. (2014) Distribution and dissemination of the Val1016Ile and Phe1534Cys Kdr mutations in <i>Aedes aegypti</i> Brazilian natural populations. Parasites &amp; Vectors 7:25, Tabela 3. doi:10.1186/1756-3305-7-25. Smith LB et al. (2021) Fitness costs of individual and combined pyrethroid resistance mechanisms, kdr and CYP-mediated detoxification, in <i>Aedes aegypti</i>. PLoS Neglected Tropical Diseases 15(3):e0009271. doi:10.1371/journal.pntd.0009271.</p>
+    <p>Modelo: um loco, dois alelos, população grande, acasalamento ao acaso, gerações separadas; <i>p</i>' = (<i>p</i>²<i>w</i><sub>RR</sub> + <i>pq w</i><sub>RS</sub>) / <span class="media">w</span>. BIOC10 Genética II, Instituto de Biologia, UFBA.</p>
+  </footer>
+</div>
+<script src="js/modelo.js"></script>
+<script src="js/dados.js"></script>
+<script src="js/grafico.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

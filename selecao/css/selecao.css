@@ -1,0 +1,149 @@
+/* Fumacê e seleção: acréscimos à folha de estilo da prática de 22/10 */
+
+.horario {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  margin: -0.3rem 0 0.6rem;
+}
+
+.rotulo-grupo {
+  font-weight: 600;
+  margin: 0.9rem 0 0.1rem;
+}
+
+.controles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .controles { grid-template-columns: 1fr; }
+}
+
+.controle { margin: 0.4rem 0; }
+.controle label { margin-top: 0.3rem; }
+.controle output { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+input[type="range"] {
+  width: 100%;
+  min-height: 44px;
+  accent-color: var(--azul-texto);
+  margin: 0;
+}
+
+.linha-ajuste {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.linha-ajuste input[type="range"] { flex: 1 1 auto; }
+.linha-ajuste button { flex: none; font-size: 1.2rem; font-weight: 700; }
+
+.grupo-botoes button.escolha,
+.pare button.feito-ed {
+  display: inline-block;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.grupo-botoes.coluna { flex-direction: column; }
+.grupo-botoes.coluna button.escolha {
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+
+.legenda { color: var(--texto-suave); margin: 0.2rem 0.4rem 0.3rem; }
+
+/* Gráfico */
+.grafico-caixa {
+  background: var(--papel);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 0.4rem;
+  margin: 0.8rem 0;
+}
+
+svg.grafico { display: block; width: 100%; height: auto; }
+
+.grade-linha { stroke: var(--borda); stroke-width: 1; }
+.grade-linha.fraca { stroke-dasharray: 2 4; }
+.eixo { stroke: var(--borda-forte); stroke-width: 1.5; }
+.eixo-texto { fill: var(--texto-suave); font-size: 14px; font-variant-numeric: tabular-nums; }
+.eixo-rotulo { fill: var(--texto); font-size: 14px; font-weight: 600; }
+
+.serie { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.serie.r { stroke: var(--laranja); }
+.serie.s { stroke: var(--azul); }
+.serie.cinza { stroke: var(--cinza); }
+.serie.fina { stroke-width: 2.5; }
+.serie.cheio { stroke-dasharray: none; }
+.serie.tracejado { stroke-dasharray: 10 7; }
+.serie.pontilhado { stroke-dasharray: 2 6; }
+.serie-rotulo { fill: var(--texto); font-size: 14px; font-weight: 600; paint-order: stroke; stroke: var(--papel); stroke-width: 4px; }
+
+.marca { fill: var(--texto); stroke: var(--papel); stroke-width: 2; }
+.marca.atual { fill: var(--laranja); }
+.marca.vazia { fill: var(--papel); stroke: var(--texto); stroke-width: 2.5; }
+.marca-texto { fill: var(--texto); font-size: 14px; font-weight: 600; paint-order: stroke; stroke: var(--papel); stroke-width: 4px; }
+
+.referencia { stroke: var(--cinza); stroke-width: 1.5; stroke-dasharray: 6 5; }
+.ref-texto { fill: var(--texto-suave); font-size: 13px; paint-order: stroke; stroke: var(--papel); stroke-width: 4px; }
+
+/* Perguntas de um toque */
+.pergunta {
+  border-top: 1px solid var(--borda);
+  padding-top: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.retorno {
+  background: var(--destaque-fundo);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.3rem 0 0.6rem;
+}
+
+/* Cartão do estudo dirigido */
+.pare {
+  background: var(--papel);
+  border: 2px solid var(--texto);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin: 1.2rem 0 0.8rem;
+}
+
+.pare-titulo {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-top: 0;
+}
+
+.pare .feito-ed[aria-pressed="true"] {
+  background: var(--texto);
+  color: var(--fundo);
+  border-color: var(--texto);
+}
+
+.pare .feito-ed[aria-pressed="true"]::before { content: "✓"; }
+
+/* Barra superior sobre aptidão média */
+.media {
+  text-decoration: overline;
+  font-style: italic;
+}
+
+.acerto { font-weight: 700; }
+.acerto::before { content: "✓ "; }
+
+table.geracao td.num, table.geracao th.num { white-space: nowrap; }
+table.geracao tfoot td { font-weight: 600; border-bottom: none; }
+
+#r2-quadro-s p { margin: 0.2rem 0; }
+
+@media print {
+  #tela-passo-6 { display: none !important; }
+  #tela-passo-7 { display: block !important; }
+}
