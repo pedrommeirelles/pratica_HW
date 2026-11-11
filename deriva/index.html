@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prática de deriva genética com o mico-leão-dourado e a febre amarela. BIOC10 Genética II, UFBA.">
+  <title>Deriva e febre amarela · BIOC10</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/deriva.css">
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <h1>Deriva e febre amarela</h1>
+    <p class="subtitulo">Deriva genética no mico-leão-dourado · BIOC10 Genética II · Prática de 12/11/2026</p>
+    <nav class="barra" aria-label="Passos da prática">
+      <ol id="lista-passos">
+        <li><a href="#passo-1" data-passo="1">1 Previsão</a></li>
+        <li><a href="#passo-2" data-passo="2">2 Sorteio</a></li>
+        <li><a href="#passo-3" data-passo="3">3 Febre amarela</a></li>
+        <li><a href="#passo-4" data-passo="4">4 Reprodutores</a></li>
+        <li><a href="#passo-5" data-passo="5">5 Dados</a></li>
+        <li><a href="#passo-6" data-passo="6">6 Fechamento</a></li>
+        <li><a href="#passo-7" data-passo="7">7 Registro</a></li>
+      </ol>
+      <button type="button" id="botao-projecao" class="pequeno" aria-pressed="false" title="Modo projeção: fonte maior">A+</button>
+    </nav>
+  </header>
+
+  <main id="principal">
+
+    <!-- Passo 1 -->
+    <section class="tela" id="tela-passo-1" aria-labelledby="titulo-passo-1">
+      <h2 id="titulo-passo-1">1. Sua previsão</h2>
+      <p class="horario">9h00 a 9h05</p>
+      <p>A febre amarela chegou às matas do mico-leão-dourado (<i>Leontopithecus rosalia</i>), no Rio de Janeiro: o primeiro mico morto pela doença foi confirmado em maio de 2018. A população estimada caiu de 3.706 micos em 2014 para cerca de 2.516 em 2018 (Dietz et al., 2019). Hoje você vai ver o que um surto assim faz com a variação genética de um fragmento pequeno de mata. As contas ficam com o aplicativo: você prevê, roda, anota e interpreta.</p>
+      <div class="nota">Os problemas têm os mesmos números aqui e no roteiro (P1 a P15).</div>
+
+      <h3>a) Depois de um surto, um fragmento fica com só cinco casais e depois volta a crescer. O que cai mais, em proporção?</h3>
+      <div class="grupo-botoes coluna" role="group" aria-label="Previsão a" id="botoes-prev-a">
+        <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) O número de alelos</button>
+        <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) A heterozigosidade</button>
+        <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Os dois caem igual</button>
+        <button type="button" class="escolha" data-valor="d" aria-pressed="false">(d) Nenhum, porque a população volta a crescer</button>
+      </div>
+
+      <h3>b) Num fragmento com 10 micos que se reproduzem, um alelo neutro começa com 50%. Em 30 gerações:</h3>
+      <div class="grupo-botoes coluna" role="group" aria-label="Previsão b" id="botoes-prev-b">
+        <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) Fica perto de 50%</button>
+        <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Sobe, porque é comum</button>
+        <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Pode chegar a 0% ou a 100% por acaso</button>
+        <button type="button" class="escolha" data-valor="d" aria-pressed="false">(d) Cai, porque é neutro</button>
+      </div>
+      <p id="eco-previsao" class="suave" aria-live="polite"></p>
+
+      <label for="campo-nome">Seu nome (opcional, entra no registro)</label>
+      <input type="text" id="campo-nome" autocomplete="name" maxlength="80">
+
+      <div class="rodape-passo">
+        <div id="recomecar-tudo"></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-2">Próximo: o sorteio</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 2 -->
+    <section class="tela" id="tela-passo-2" aria-labelledby="titulo-passo-2">
+      <h2 id="titulo-passo-2">2. O sorteio de cada geração</h2>
+      <p class="horario">9h05 a 9h20</p>
+      <p>Num fragmento com <i>N</i> micos que se reproduzem, há 2<i>N</i> cópias do gene. A geração seguinte recebe 2<i>N</i> cópias sorteadas, com reposição, das cópias dos pais. Os alelos A (azul, círculo) e a (laranja, losango) são neutros: nenhum ajuda nem atrapalha. Mesmo assim, a frequência de A (<i>p</i>) muda, só pelo acaso do sorteio. Isso é a deriva genética.</p>
+
+      <div class="quadro">
+        <div class="controles">
+          <div class="controle">
+            <label for="s-N">Micos que se reproduzem (<i>N</i>): <output id="s-N-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="s-N-menos" aria-label="Diminuir N em 1">−</button>
+              <input type="range" id="s-N" min="4" max="200" step="1">
+              <button type="button" class="pequeno" id="s-N-mais" aria-label="Aumentar N em 1">+</button>
+            </div>
+          </div>
+          <div class="controle">
+            <label for="s-p0">Frequência inicial de A (<i>p</i><sub>0</sub>): <output id="s-p0-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="s-p0-menos" aria-label="Diminuir p0 em 0,05">−</button>
+              <input type="range" id="s-p0" min="0.05" max="0.95" step="0.05">
+              <button type="button" class="pequeno" id="s-p0-mais" aria-label="Aumentar p0 em 0,05">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>a) Um fragmento, uma geração de cada vez</h3>
+      <div id="um-copias" class="copias" aria-hidden="true"></div>
+      <p id="um-texto" class="resultado" aria-live="polite"></p>
+      <div class="grupo-botoes">
+        <button type="button" class="principal" id="um-proxima">Próxima geração</button>
+        <button type="button" id="um-mais10">Mais 10</button>
+        <button type="button" id="um-recomecar">Recomeçar</button>
+      </div>
+      <p class="pequeno suave">Recomeçar volta à geração 0 com outro sorteio.</p>
+      <div class="grafico-caixa" id="um-grafico"></div>
+
+      <h3>b) Muitos fragmentos ao mesmo tempo</h3>
+      <p>Cada linha azul é um fragmento com os mesmos <i>N</i> e <i>p</i><sub>0</sub>. A linha tracejada é a média de <i>p</i> entre os fragmentos.</p>
+      <div class="quadro">
+        <div class="controles">
+          <div class="controle">
+            <label for="s-frag">Fragmentos: <output id="s-frag-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="s-frag-menos" aria-label="Diminuir fragmentos em 1">−</button>
+              <input type="range" id="s-frag" min="1" max="50" step="1">
+              <button type="button" class="pequeno" id="s-frag-mais" aria-label="Aumentar fragmentos em 1">+</button>
+            </div>
+          </div>
+          <div class="controle">
+            <label for="s-ger">Gerações: <output id="s-ger-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="s-ger-menos" aria-label="Diminuir gerações em 10">−</button>
+              <input type="range" id="s-ger" min="10" max="200" step="10">
+              <button type="button" class="pequeno" id="s-ger-mais" aria-label="Aumentar gerações em 10">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="grupo-botoes">
+          <button type="button" class="principal" id="v-rodar">Rodar</button>
+          <button type="button" id="v-sortear">Sortear de novo</button>
+        </div>
+        <p class="rotulo-grupo">Atalhos (montam os controles e rodam)</p>
+        <div class="grupo-botoes">
+          <button type="button" class="pequeno" id="v-P1"><span>P1: <i>N</i> 10</span></button>
+          <button type="button" class="pequeno" id="v-P2"><span>P2: <i>N</i> 100</span></button>
+          <button type="button" class="pequeno" id="v-P3"><span>P3: <i>p</i><sub>0</sub> 0,20</span></button>
+        </div>
+      </div>
+      <p id="v-aviso" class="aviso" hidden>Os controles mudaram depois da última rodada. Toque em Rodar.</p>
+      <div class="grafico-caixa" id="v-grafico"></div>
+      <div id="v-contadores" class="contadores" aria-live="polite"></div>
+      <p id="v-rodada" class="pequeno suave"></p>
+
+      <h3>Problemas</h3>
+      <div class="problema" id="prob-P1">
+        <p><strong>P1.</strong> Com <i>N</i> = 10, <i>p</i><sub>0</sub> = 0,50, 20 fragmentos e 30 gerações (atalho P1): em quantos fragmentos o A se fixou ou foi perdido?</p>
+        <div class="campos">
+          <div><label for="campo-P1">Fragmentos (de 20)</label><input type="text" inputmode="decimal" id="campo-P1" data-campo="P1" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P1" hidden></p>
+      </div>
+      <div class="problema" id="prob-P2">
+        <p><strong>P2.</strong> O mesmo, com <i>N</i> = 100 (atalho P2): em quantos fragmentos o A se fixou ou foi perdido?</p>
+        <div class="campos">
+          <div><label for="campo-P2">Fragmentos (de 20)</label><input type="text" inputmode="decimal" id="campo-P2" data-campo="P2" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P2" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P2">
+        <p><strong>P2, continuação.</strong> Por que a diferença?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P2: por que a diferença">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Com mais micos, surgem mais mutações</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Foi azar desta rodada</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Com menos micos, o sorteio de cada geração erra mais</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">Com menos micos, a seleção natural é mais forte</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="problema" id="prob-P3">
+        <p><strong>P3.</strong> Agora <i>N</i> = 10, <i>p</i><sub>0</sub> = 0,20, 50 fragmentos e 200 gerações (atalho P3). Em que fração dos fragmentos o A se fixou?</p>
+        <div class="campos">
+          <div><label for="campo-P3">Fração (de 0 a 1)</label><input type="text" inputmode="decimal" id="campo-P3" data-campo="P3" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P3" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P4">
+        <p><strong>P4.</strong> Olhe a linha tracejada. A média das frequências entre os fragmentos mudou?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P4">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Subiu: o A tende a se fixar</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Quase não: a deriva não tem direção</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Desceu: o A tende a ser perdido</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">Foi para 0 ou para 1, como cada fragmento</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-3">Próximo: a febre amarela</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 3 -->
+    <section class="tela" id="tela-passo-3" aria-labelledby="titulo-passo-3">
+      <h2 id="titulo-passo-3">3. A febre amarela num fragmento</h2>
+      <p class="horario">9h20 a 9h38</p>
+      <p>Agora o gene tem seis alelos, como um microssatélite. As frequências antes do surto são ilustrativas, não são dados do mico. A heterozigosidade esperada é <i>H</i><sub>e</sub> = 1 − Σ<i>p</i><sub>i</sub>² = 0,740.</p>
+      <div class="alelos-legenda" id="alelos-legenda"></div>
+      <p>O surto deixa <i>N</i><sub>b</sub> micos que se reproduzem. Premissa do modelo: depois do surto, esse número dobra a cada geração até voltar a <i>N</i><sub>0</sub>, o tamanho de antes. O aplicativo roda 500 fragmentos iguais e mostra as médias.</p>
+
+      <div class="quadro">
+        <div class="controles">
+          <div class="controle">
+            <label for="g-N0">Antes do surto (<i>N</i><sub>0</sub>): <output id="g-N0-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="g-N0-menos" aria-label="Diminuir N0 em 10">−</button>
+              <input type="range" id="g-N0" min="20" max="400" step="10">
+              <button type="button" class="pequeno" id="g-N0-mais" aria-label="Aumentar N0 em 10">+</button>
+            </div>
+          </div>
+          <div class="controle">
+            <label for="g-Nb">Logo depois do surto (<i>N</i><sub>b</sub>): <output id="g-Nb-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="g-Nb-menos" aria-label="Diminuir Nb em 1">−</button>
+              <input type="range" id="g-Nb" min="2" max="100" step="1">
+              <button type="button" class="pequeno" id="g-Nb-mais" aria-label="Aumentar Nb em 1">+</button>
+            </div>
+          </div>
+          <div class="controle">
+            <label for="g-t">Gerações depois do surto: <output id="g-t-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="g-t-menos" aria-label="Diminuir gerações em 1">−</button>
+              <input type="range" id="g-t" min="0" max="30" step="1">
+              <button type="button" class="pequeno" id="g-t-mais" aria-label="Aumentar gerações em 1">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="grupo-botoes">
+          <button type="button" class="principal" id="g-rodar">Rodar</button>
+          <button type="button" id="g-sortear">Sortear de novo</button>
+        </div>
+        <p class="rotulo-grupo">Atalhos (mudam o <i>N</i><sub>b</sub> e rodam)</p>
+        <div class="grupo-botoes">
+          <button type="button" class="pequeno" id="g-terco">Morreu um terço</button>
+          <button type="button" class="pequeno" id="g-cinco">Cinco casais, como em Poço das Antas</button>
+          <button type="button" class="pequeno" id="g-dois">Dois casais</button>
+        </div>
+      </div>
+      <p id="g-aviso" class="aviso" hidden>Os controles mudaram depois da última rodada. Toque em Rodar.</p>
+
+      <div id="g-resultados">
+        <div class="tabela-rolagem" id="g-tabela"></div>
+        <div class="grafico-caixa" id="g-grafico"></div>
+        <h3>Em quantos fragmentos cada alelo sumiu</h3>
+        <div id="g-barras"></div>
+        <h3>Um fragmento de exemplo</h3>
+        <div id="g-exemplo"></div>
+        <div class="grupo-botoes"><button type="button" class="pequeno" id="g-outro">Ver outro fragmento</button></div>
+      </div>
+      <p id="g-rodada" class="pequeno suave"></p>
+
+      <h3>Problemas</h3>
+      <div class="problema" id="prob-P5">
+        <p><strong>P5.</strong> Com cinco casais (<i>N</i><sub>b</sub> = 10): quanto resta, logo depois do surto, do número de alelos e do <i>H</i><sub>e</sub>, em % do valor de antes?</p>
+        <div class="campos">
+          <div><label for="campo-P5a">Alelos que restam (%)</label><input type="text" inputmode="decimal" id="campo-P5a" data-campo="P5a" autocomplete="off"></div>
+          <div><label for="campo-P5b"><i>H</i><sub>e</sub> que resta (%)</label><input type="text" inputmode="decimal" id="campo-P5b" data-campo="P5b" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P5" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P6">
+        <p><strong>P6.</strong> Que alelos somem primeiro?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P6">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Todos têm a mesma chance</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Os comuns, de 40% e 25%</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Os raros, de 6% e 4%</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P7">
+        <p><strong>P7.</strong> Toque em "Morreu um terço" (<i>N</i><sub>b</sub> = 67). O que muda logo depois do surto?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P7">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Some um terço dos alelos</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Quase nada se perde logo depois</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">O <i>H</i><sub>e</sub> cai um terço</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P8">
+        <p><strong>P8.</strong> Depois de 10 gerações de recuperação, os alelos perdidos voltaram?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P8">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Sim, porque a população voltou ao tamanho de antes</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Voltaram alguns, por acaso</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Não: só voltam por mutação ou pela chegada de micos de fora</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="quadro" id="g-previsoes"></div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-4">Próximo: quem se reproduz</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 4 -->
+    <section class="tela" id="tela-passo-4" aria-labelledby="titulo-passo-4">
+      <h2 id="titulo-passo-4">4. Quantos micos se reproduzem</h2>
+      <p class="horario">9h38 a 9h50</p>
+      <p>Num grupo de micos-leões-dourados, quase todos os filhotes que sobrevivem são do casal dominante. As fêmeas subordinadas até engravidam, mas perdem a maior parte das gestações (Henry et al., 2013). Às vezes, duas fêmeas do mesmo grupo se reproduzem (Dietz e Baker, 1993). Os outros micos do grupo ajudam a criar os filhotes.</p>
+      <p>Em Poço das Antas, oito grupos acompanhados desapareceram com a febre amarela. No fim de 2018, foram vistos 16 micos em 5 grupos (Dietz et al., 2019).</p>
+      <p>Para a deriva, conta o tamanho efetivo (<i>N</i><sub>e</sub>): quantos passam genes adiante. Com <i>N</i><sub>m</sub> machos e <i>N</i><sub>f</sub> fêmeas reprodutores, <i>N</i><sub>e</sub> = 4<i>N</i><sub>m</sub><i>N</i><sub>f</sub> / (<i>N</i><sub>m</sub> + <i>N</i><sub>f</sub>). A cada geração, a heterozigosidade cai, em média, 1/(2<i>N</i><sub>e</sub>).</p>
+
+      <div class="quadro">
+        <div class="controles">
+          <div class="controle">
+            <label for="ne-grupos">Grupos: <output id="ne-grupos-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="ne-grupos-menos" aria-label="Diminuir grupos em 1">−</button>
+              <input type="range" id="ne-grupos" min="1" max="100" step="1">
+              <button type="button" class="pequeno" id="ne-grupos-mais" aria-label="Aumentar grupos em 1">+</button>
+            </div>
+          </div>
+          <div class="controle">
+            <label for="ne-t">Gerações: <output id="ne-t-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="ne-t-menos" aria-label="Diminuir gerações em 1">−</button>
+              <input type="range" id="ne-t" min="1" max="50" step="1">
+              <button type="button" class="pequeno" id="ne-t-mais" aria-label="Aumentar gerações em 1">+</button>
+            </div>
+          </div>
+          <div class="controle">
+            <label for="ne-femeas">Fêmeas que se reproduzem por grupo: <output id="ne-femeas-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="ne-femeas-menos" aria-label="Diminuir fêmeas em 1">−</button>
+              <input type="range" id="ne-femeas" min="1" max="3" step="1">
+              <button type="button" class="pequeno" id="ne-femeas-mais" aria-label="Aumentar fêmeas em 1">+</button>
+            </div>
+          </div>
+          <div class="controle">
+            <label for="ne-machos">Machos que se reproduzem por grupo: <output id="ne-machos-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="ne-machos-menos" aria-label="Diminuir machos em 1">−</button>
+              <input type="range" id="ne-machos" min="1" max="3" step="1">
+              <button type="button" class="pequeno" id="ne-machos-mais" aria-label="Aumentar machos em 1">+</button>
+            </div>
+          </div>
+        </div>
+        <div id="ne-saida" class="resultado" aria-live="polite"></div>
+      </div>
+
+      <h3>Problemas</h3>
+      <div class="problema" id="prob-P9">
+        <p><strong>P9.</strong> Com os 5 grupos que restaram em Poço das Antas, um casal por grupo: qual é o <i>N</i><sub>e</sub>? Quanto da heterozigosidade se perde por geração?</p>
+        <div class="campos">
+          <div><label for="campo-P9a"><i>N</i><sub>e</sub></label><input type="text" inputmode="decimal" id="campo-P9a" data-campo="P9a" autocomplete="off"></div>
+          <div><label for="campo-P9b">Perda por geração (%)</label><input type="text" inputmode="decimal" id="campo-P9b" data-campo="P9b" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P9" hidden></p>
+      </div>
+      <div class="problema" id="prob-P10">
+        <p><strong>P10.</strong> Antes do surto, eram pelo menos 13 grupos (os 5 que ficaram e os 8 que sumiram). Qual era o <i>N</i><sub>e</sub> e a perda por geração?</p>
+        <div class="campos">
+          <div><label for="campo-P10a"><i>N</i><sub>e</sub></label><input type="text" inputmode="decimal" id="campo-P10a" data-campo="P10a" autocomplete="off"></div>
+          <div><label for="campo-P10b">Perda por geração (%)</label><input type="text" inputmode="decimal" id="campo-P10b" data-campo="P10b" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P10" hidden></p>
+      </div>
+      <div class="problema" id="prob-P11">
+        <p><strong>P11.</strong> Quanto da heterozigosidade resta em 10 gerações, com 5 grupos e com 13 grupos?</p>
+        <div class="campos">
+          <div><label for="campo-P11a">Com 5 grupos (%)</label><input type="text" inputmode="decimal" id="campo-P11a" data-campo="P11a" autocomplete="off"></div>
+          <div><label for="campo-P11b">Com 13 grupos (%)</label><input type="text" inputmode="decimal" id="campo-P11b" data-campo="P11b" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P11" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P12">
+        <p><strong>P12.</strong> Por que o <i>N</i><sub>e</sub> (10) é menor que os 16 micos vistos?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P12">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Só os casais dominantes deixam filhotes; os outros micos do grupo quase não passam genes adiante</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Seis micos morreram depois da contagem</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">O <i>N</i><sub>e</sub> conta só as fêmeas</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-5">Próximo: os dados</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 5 -->
+    <section class="tela" id="tela-passo-5" aria-labelledby="titulo-passo-5">
+      <h2 id="titulo-passo-5">5. O que os dados mostram</h2>
+      <p class="horario">9h50 a 10h05</p>
+      <div class="quadro">
+        <h3>Dietz et al. (2019), <i>Scientific Reports</i></h3>
+        <ul>
+          <li>A população estimada era de 3.706 micos em 2014 e de cerca de 2.516 em 2018.</li>
+          <li>Em Poço das Antas, oito grupos acompanhados desapareceram. No fim de 2018, foram vistos 16 micos em 5 grupos.</li>
+          <li>Ali, o tamanho médio dos grupos (só adultos) foi de 4,88 em 2015 para 2,60 em 2018. Com tão poucos grupos, a diferença não foi significativa (<i>p</i> = 0,072).</li>
+          <li>O primeiro mico morto por febre amarela foi confirmado em maio de 2018.</li>
+          <li>Em 2019, não havia vacina contra a febre amarela para primatas não humanos.</li>
+          <li>Os autores recomendam translocar micos para manter a diversidade genética dos fragmentos pequenos e plantar corredores de mata entre as unidades de manejo.</li>
+        </ul>
+      </div>
+      <div class="quadro">
+        <h3>Grativol et al. (2001), <i>Conservation Genetics</i></h3>
+        <ul>
+          <li>Quatro microssatélites em quatro populações de mico-leão-dourado isoladas havia pouco tempo pela fragmentação da mata.</li>
+          <li>O número de alelos variou entre as populações; a heterozigosidade, não.</li>
+          <li>Os autores concluíram que os alelos se perdem mais depressa que a heterozigosidade.</li>
+        </ul>
+        <p class="pequeno suave">Fonte: resumo do artigo.</p>
+      </div>
+
+      <h3>Problemas</h3>
+      <div class="problema" id="prob-P13">
+        <p><strong>P13.</strong> Qual foi a queda da população estimada de 2014 para 2018, em %?</p>
+        <div class="campos">
+          <div><label for="campo-P13">Queda (%)</label><input type="text" inputmode="decimal" id="campo-P13" data-campo="P13" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P13" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P14">
+        <p><strong>P14.</strong> O resultado de Grativol et al. (2001) combina com o seu Passo 3?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P14">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Não: no Passo 3, a heterozigosidade caiu mais</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Sim: os alelos caem antes da heterozigosidade</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Não: no Passo 3, os dois caíram igual</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P15">
+        <p><strong>P15.</strong> O que devolve alelos perdidos a um fragmento?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P15">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">A vacina contra a febre amarela</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">O crescimento da população depois do surto</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Mais gerações de deriva</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">A chegada de micos de outra população, por translocação ou por corredor</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-6">Próximo: fechamento</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 6 -->
+    <section class="tela" id="tela-passo-6" aria-labelledby="titulo-passo-6">
+      <h2 id="titulo-passo-6">6. Fechamento</h2>
+      <p class="horario">10h05 a 10h12</p>
+      <ol class="mensagens">
+        <li>A deriva é o sorteio de cada geração. Ela não tem direção e pesa mais quanto menor o <i>N</i><sub>e</sub>.</li>
+        <li>Num gargalo, os alelos raros somem primeiro. A heterozigosidade cai menos e mais devagar.</li>
+        <li>O número de micos pode voltar. Os alelos perdidos não voltam, a menos que cheguem de fora.</li>
+      </ol>
+      <div class="quadro">
+        <h3>Seus números</h3>
+        <div id="seus-numeros"></div>
+      </div>
+      <div class="nota">Próximas aulas: 17/11, endogamia, fluxo gênico e heterose; 19/11, prática de fluxo gênico.</div>
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-7">Próximo: registro</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 7 -->
+    <section class="tela" id="tela-passo-7" aria-labelledby="titulo-passo-7">
+      <h2 id="titulo-passo-7">7. Seu registro</h2>
+      <p class="horario">10h12 a 10h20</p>
+      <p>O registro fica salvo neste aparelho. Copie ou baixe, se quiser guardar.</p>
+      <pre class="registro" id="registro-texto"></pre>
+      <div class="grupo-botoes acoes-registro">
+        <button type="button" class="principal" id="botao-copiar">Copiar o registro</button>
+        <button type="button" id="botao-baixar">Baixar como .txt</button>
+        <a class="botao" id="botao-moodle" href="#" target="_blank" rel="noopener" hidden>Abrir a ficha de saída</a>
+      </div>
+      <p id="msg-copiar" class="suave" aria-live="polite"></p>
+      <div class="nota">A ficha de saída fica aberta no Moodle das 10h10 às 10h45.</div>
+      <div class="rodape-passo">
+        <div id="recomecar-fim"></div>
+        <div class="direita"><button type="button" data-ir="#passo-1">Voltar ao início</button></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p><strong>Fontes.</strong> Dietz JM, Hankerson SJ, Alexandre BR, Henry MD, Martins AF, Ferraz LP, Ruiz-Miranda CR (2019) Yellow fever in Brazil threatens successful recovery of endangered golden lion tamarins. Scientific Reports 9:12926. doi:10.1038/s41598-019-49199-6. Grativol AD, Ballou JD, Fleischer RC (2001) Microsatellite variation within and among recently fragmented populations of the golden lion tamarin (<i>Leontopithecus rosalia</i>). Conservation Genetics 2:1-9. Dietz JM, Baker AJ (1993) Polygyny and female reproductive success in golden lion tamarins, <i>Leontopithecus rosalia</i>. Animal Behaviour 46:1067-1078. Henry MD, Hankerson SJ, Siani JM, French JA, Dietz JM (2013) High rates of pregnancy loss by subordinates leads to high reproductive skew in wild golden lion tamarins (<i>Leontopithecus rosalia</i>). Hormones and Behavior 63(5):675-683. doi:10.1016/j.yhbeh.2013.02.009.</p>
+    <p>Modelo: Wright-Fisher, um loco, alelos neutros, gerações separadas; a cada geração, 2<i>N</i> cópias sorteadas com reposição; <i>H</i><sub>e</sub> = 1 − Σ<i>p</i><sub>i</sub>²; <i>N</i><sub>e</sub> = 4<i>N</i><sub>m</sub><i>N</i><sub>f</sub> / (<i>N</i><sub>m</sub> + <i>N</i><sub>f</sub>). As frequências do microssatélite do Passo 3 são ilustrativas. BIOC10 Genética II, Instituto de Biologia, UFBA.</p>
+  </footer>
+</div>
+<script src="js/modelo.js"></script>
+<script src="js/dados.js"></script>
+<script src="js/grafico.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+/* Deriva e febre amarela: acréscimos à folha de estilo das práticas de 22/10 e 05/11 */
+
+.horario {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  margin: -0.3rem 0 0.6rem;
+}
+
+.rotulo-grupo {
+  font-weight: 600;
+  margin: 0.9rem 0 0.1rem;
+}
+
+/* Controles */
+.controles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .controles { grid-template-columns: 1fr; }
+}
+
+.controles > * { min-width: 0; }
+.controle { margin: 0.4rem 0; }
+.controle label { margin-top: 0.3rem; }
+.controle output { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+input[type="range"] {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  accent-color: var(--azul-texto);
+  margin: 0;
+}
+
+.linha-ajuste {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.linha-ajuste input[type="range"] { flex: 1 1 auto; }
+.linha-ajuste button { flex: none; font-size: 1.2rem; font-weight: 700; }
+
+.grupo-botoes button.escolha {
+  display: inline-block;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.grupo-botoes.coluna { flex-direction: column; }
+.grupo-botoes.coluna button.escolha {
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+
+.aviso { margin: 0.6rem 0; }
+.vazio { color: var(--texto-suave); margin: 1.2rem 0.6rem; text-align: center; }
+
+/* Gráfico */
+.grafico-caixa {
+  background: var(--papel);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 0.4rem;
+  margin: 0.8rem 0;
+}
+
+svg.grafico { display: block; width: 100%; height: auto; }
+
+.grade-linha { stroke: var(--borda); stroke-width: 1; }
+.grade-linha.fraca { stroke-dasharray: 2 4; }
+.eixo { stroke: var(--borda-forte); stroke-width: 1.5; }
+.eixo-texto { fill: var(--texto-suave); font-size: 14px; font-variant-numeric: tabular-nums; }
+.eixo-rotulo { fill: var(--texto); font-size: 14px; font-weight: 600; }
+
+.serie { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.serie.r { stroke: var(--laranja); }
+.serie.s { stroke: var(--azul); }
+.serie.frag { stroke: var(--azul); stroke-width: 2; stroke-opacity: 0.35; }
+.serie.media { stroke: var(--texto); stroke-width: 3; }
+.serie.cheio { stroke-dasharray: none; }
+.serie.tracejado { stroke-dasharray: 10 7; }
+.serie.pontilhado { stroke-dasharray: 2 6; }
+.serie-rotulo { fill: var(--texto); font-size: 14px; font-weight: 600; paint-order: stroke; stroke: var(--papel); stroke-width: 4px; }
+
+.marca { fill: var(--texto); stroke: var(--papel); stroke-width: 2; }
+.marca.atual { fill: var(--azul); }
+.marca-texto { fill: var(--texto); font-size: 14px; font-weight: 600; paint-order: stroke; stroke: var(--papel); stroke-width: 4px; }
+
+.referencia { stroke: var(--cinza); stroke-width: 1.5; stroke-dasharray: 6 5; }
+.ref-texto { fill: var(--texto-suave); font-size: 13px; paint-order: stroke; stroke: var(--papel); stroke-width: 4px; }
+
+/* Cópias do gene (Passo 2a): A círculo azul, a losango laranja */
+.copias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  background: var(--papel);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 0.6rem;
+  margin: 0.6rem 0;
+}
+
+.copia { display: block; width: 12px; height: 12px; flex: none; }
+.copias.grandes { gap: 7px; }
+.copias.grandes .copia { width: 20px; height: 20px; }
+.copia.A { background: var(--azul); border-radius: 50%; }
+.copia.a { background: var(--laranja); border-radius: 2px; transform: rotate(45deg) scale(0.78); }
+
+/* Contadores (Passo 2b) */
+.contadores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin: 0.6rem 0;
+}
+
+.contadores > div {
+  background: var(--papel);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  min-width: 0;
+}
+
+.contadores .n {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .contadores { grid-template-columns: 1fr 1fr; }
+}
+
+/* Alelos do microssatélite (Passo 3) */
+.alelos-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin: 0.5rem 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.alelos-legenda > span { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+.cor {
+  display: inline-block;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 3px;
+  flex: none;
+}
+
+table.momentos { font-size: 0.92rem; }
+table.momentos td.num, table.momentos th.num { white-space: nowrap; }
+table.momentos .pc { display: block; font-size: 0.85rem; }
+
+.perdas {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.25rem 0.6rem;
+  align-items: center;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.perdas .rotulo { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; white-space: nowrap; }
+.perdas .barras-par { display: grid; gap: 3px; min-width: 0; }
+
+.barra-h {
+  position: relative;
+  height: 0.8rem;
+  background: var(--destaque-fundo);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barra-h span { display: block; height: 100%; border-radius: 4px; }
+.barra-h.depois span { opacity: 0.45; }
+.perdas .valor { font-size: 0.85rem; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+
+.composicao {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 0.6rem;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.composicao .rotulo { font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+
+.empilhada {
+  display: flex;
+  height: 1.7rem;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--destaque-fundo);
+  min-width: 0;
+}
+
+.empilhada span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--papel);
+}
+
+.empilhada span:last-child { border-right: none; }
+
+/* Problemas */
+.problema, .pergunta {
+  border-top: 1px solid var(--borda);
+  padding-top: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.problema .campos { max-width: 30rem; }
+.problema input[type="text"] { max-width: 10rem; }
+
+.retorno {
+  background: var(--destaque-fundo);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.3rem 0 0.6rem;
+}
+
+ol.mensagens { padding-left: 1.4rem; }
+ol.mensagens li { margin: 0.5rem 0; font-size: 1.05rem; }
+
+#seus-numeros ul { padding-left: 1.2rem; margin: 0.3rem 0; }
+#seus-numeros li { margin: 0.2rem 0; }
+
+#g-previsoes:empty { display: none; }
+
+@media print {
+  #tela-passo-6 { display: none !important; }
+  #tela-passo-7 { display: block !important; }
+}
