@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prática de endogamia e fluxo gênico com o mico-leão-dourado: corredor ou translocação? BIOC10 Genética II, UFBA.">
+  <title>Corredor ou translocação? · BIOC10</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/fluxo.css">
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <h1>Corredor ou translocação?</h1>
+    <p class="subtitulo">Endogamia e fluxo gênico no mico-leão-dourado · BIOC10 Genética II · Prática de 19/11/2026</p>
+    <nav class="barra" aria-label="Passos da prática">
+      <ol id="lista-passos">
+        <li><a href="#passo-1" data-passo="1">1 Previsão</a></li>
+        <li><a href="#passo-2" data-passo="2">2 Simulador</a></li>
+        <li><a href="#passo-3" data-passo="3">3 Dados de União</a></li>
+        <li><a href="#passo-4" data-passo="4">4 Fechamento</a></li>
+      </ol>
+      <button type="button" id="botao-projecao" class="pequeno" aria-pressed="false" title="Modo projeção: fonte maior">A+</button>
+    </nav>
+  </header>
+
+  <main id="principal">
+
+    <!-- Passo 1 -->
+    <section class="tela" id="tela-passo-1" aria-labelledby="titulo-passo-1">
+      <h2 id="titulo-passo-1">1. Sua previsão</h2>
+      <p class="horario">9h00 a 9h03, cada um, sem conversar</p>
+      <p>O mico-leão-dourado (<i>Leontopithecus rosalia</i>) vive em fragmentos de Mata Atlântica no Rio de Janeiro, separados por pasto, estradas e cidades. Num fragmento pequeno e sem migrantes, todos acabam parentes. Hoje você compara três situações: fragmentos isolados, fragmentos ligados por um corredor de mata e fragmentos que recebem micos levados por pessoas (translocação). As contas ficam com o simulador: você prevê, roda, anota e interpreta.</p>
+      <div class="nota">Os problemas têm os mesmos números aqui e no roteiro (P1 a P13). Depois desta previsão, a equipe faz a Parte 1 do roteiro (heredogramas, no papel) e volta ao Passo 2.</div>
+
+      <h3>a) Quatro fragmentos com 10 micos cada, sem nenhum migrante, por 30 gerações. O <i>F</i> dentro dos fragmentos:</h3>
+      <div class="grupo-botoes coluna" role="group" aria-label="Previsão a" id="botoes-prev-a">
+        <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) Fica perto de zero</button>
+        <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Sobe um pouco, até uns 0,2</button>
+        <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Sobe muito, para perto de 0,8</button>
+        <button type="button" class="escolha" data-valor="d" aria-pressed="false">(d) Cai, porque os micos se acostumam</button>
+      </div>
+
+      <h3>b) Para os fragmentos recuperarem a variação genética e não voltarem a perdê-la, o que você faria?</h3>
+      <div class="grupo-botoes coluna" role="group" aria-label="Previsão b" id="botoes-prev-b">
+        <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) Só um corredor de mata ligando os fragmentos</button>
+        <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Só uma translocação de micos entre os fragmentos</button>
+        <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Os dois</button>
+      </div>
+      <p id="eco-previsao" class="suave" aria-live="polite"></p>
+
+      <label for="campo-nome">Seu nome ou o da equipe (opcional, entra no registro)</label>
+      <input type="text" id="campo-nome" autocomplete="off" maxlength="80">
+
+      <div class="rodape-passo">
+        <div id="recomecar-tudo"></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-2">Próximo: o simulador</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 2 -->
+    <section class="tela" id="tela-passo-2" aria-labelledby="titulo-passo-2">
+      <h2 id="titulo-passo-2">2. Isolados, corredor ou translocação</h2>
+      <p class="horario">9h13 a 9h33</p>
+      <p>Quatro fragmentos, cada um com <i>N</i> micos que se reproduzem, começam com as mesmas frequências de um gene com seis alelos (um microssatélite com frequências ilustrativas, o mesmo da prática de 12/11). A cada geração, cada fragmento sorteia as 2<i>N</i> cópias da geração seguinte (deriva). O simulador roda os três cenários lado a lado, 400 vezes cada, e mostra as médias:</p>
+      <ul class="cenarios">
+        <li><span class="cor-legenda iso" aria-hidden="true"></span><strong>Isolados:</strong> nenhum mico passa de um fragmento para outro.</li>
+        <li><span class="cor-legenda cor" aria-hidden="true"></span><strong>Corredor:</strong> a cada geração chegam, a cada fragmento, migrantes vindos dos outros, que se reproduzem lá.</li>
+        <li><span class="cor-legenda tra" aria-hidden="true"></span><strong>Translocação:</strong> numa geração escolhida, alguns micos de cada fragmento são trocados com os de outros fragmentos; depois, nada passa, a menos que a translocação se repita.</li>
+      </ul>
+      <p>Duas medidas. <strong><i>F</i> dentro dos fragmentos</strong> = 1 − <i>H</i><sub>S</sub>/<i>H</i><sub>0</sub>, a perda de heterozigosidade em relação ao início (<i>H</i><sub>S</sub>, a heterozigosidade esperada média dentro dos fragmentos; <i>H</i><sub>0</sub>, a do início, 0,74); sobe com a endogamia. <strong><i>F</i><sub>ST</sub></strong> = (<i>H</i><sub>T</sub> − <i>H</i><sub>S</sub>)/<i>H</i><sub>T</sub>, a diferença entre os fragmentos (<i>H</i><sub>T</sub>, a heterozigosidade esperada do conjunto, com as frequências médias dos quatro); vai de 0, quando os fragmentos têm as mesmas frequências, a 1, quando cada um ficou com um só alelo e eles não ficaram todos com o mesmo.</p>
+
+      <div class="quadro">
+        <div class="controles">
+          <div class="controle">
+            <label for="s-N">Micos que se reproduzem em cada fragmento (<i>N</i>): <output id="s-N-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="s-N-menos" aria-label="Diminuir N">−</button>
+              <input type="range" id="s-N" min="5" max="50" step="1">
+              <button type="button" class="pequeno" id="s-N-mais" aria-label="Aumentar N">+</button>
+            </div>
+          </div>
+          <div class="controle">
+            <label for="s-G">Gerações: <output id="s-G-valor"></output></label>
+            <div class="linha-ajuste">
+              <button type="button" class="pequeno" id="s-G-menos" aria-label="Diminuir gerações">−</button>
+              <input type="range" id="s-G" min="30" max="100" step="10">
+              <button type="button" class="pequeno" id="s-G-mais" aria-label="Aumentar gerações">+</button>
+            </div>
+          </div>
+        </div>
+        <p class="rotulo-grupo"><span class="cor-legenda cor" aria-hidden="true"></span>Corredor: migrantes por geração, em cada fragmento</p>
+        <div class="grupo-botoes" role="group" aria-label="Migrantes por geração no corredor" id="botoes-Nm"></div>
+        <p class="rotulo-grupo"><span class="cor-legenda tra" aria-hidden="true"></span>Translocação: micos trocados em cada fragmento</p>
+        <div class="grupo-botoes" role="group" aria-label="Micos trocados em cada fragmento" id="botoes-nT"></div>
+        <p class="rotulo-grupo">Em que geração</p>
+        <div class="grupo-botoes" role="group" aria-label="Geração da translocação" id="botoes-tT"></div>
+        <p class="rotulo-grupo">Quantas vezes</p>
+        <div class="grupo-botoes" role="group" aria-label="Repetição da translocação" id="botoes-rep"></div>
+        <div class="grupo-botoes">
+          <button type="button" id="botao-padrao">Voltar aos valores da prática</button>
+        </div>
+      </div>
+      <p id="resumo-rodada" class="pequeno suave" aria-live="polite"></p>
+
+      <h3><i>F</i> dentro dos fragmentos</h3>
+      <div class="grafico-caixa" id="grafico-F"></div>
+      <h3><i>F</i><sub>ST</sub>, a diferença entre os fragmentos</h3>
+      <div class="grafico-caixa" id="grafico-FST"></div>
+
+      <div class="quadro">
+        <div class="controle">
+          <label for="l-g">Ler a geração: <output id="l-g-valor"></output></label>
+          <div class="linha-ajuste">
+            <button type="button" class="pequeno" id="l-g-menos" aria-label="Geração anterior">−</button>
+            <input type="range" id="l-g" min="0" max="50" step="1">
+            <button type="button" class="pequeno" id="l-g-mais" aria-label="Geração seguinte">+</button>
+          </div>
+        </div>
+        <div class="grupo-botoes" role="group" aria-label="Atalhos de geração" id="botoes-ler"></div>
+        <div class="tabela-rolagem"><table class="momentos" id="tabela-valores"></table></div>
+        <p class="pequeno suave" id="teoria-iso"></p>
+        <p class="pequeno suave">Os pontos nos gráficos marcam a geração lida. Para fazer uma figura com estas curvas, baixe os dados: <button type="button" class="pequeno" id="botao-csv">Baixar os dados (.csv)</button> <span id="msg-csv" aria-live="polite"></span></p>
+      </div>
+
+      <h3>Problemas (valores da prática: <i>N</i> = 10, 50 gerações, corredor com 1 migrante por geração, translocação de 3 micos na geração 10, uma vez só)</h3>
+      <div class="problema" id="prob-P1">
+        <p><strong>P1.</strong> Isolados: qual é o <i>F</i> dentro dos fragmentos na geração 30?</p>
+        <div class="campos"><div><label for="campo-P1"><i>F</i> na geração 30</label><input type="text" inputmode="decimal" id="campo-P1" data-campo="P1" autocomplete="off"></div></div>
+        <p class="retorno" id="ret-P1" hidden></p>
+      </div>
+      <div class="problema" id="prob-P2">
+        <p><strong>P2.</strong> Isolados: e o <i>F</i><sub>ST</sub> na geração 30?</p>
+        <div class="campos"><div><label for="campo-P2"><i>F</i><sub>ST</sub> na geração 30</label><input type="text" inputmode="decimal" id="campo-P2" data-campo="P2" autocomplete="off"></div></div>
+        <p class="retorno" id="ret-P2" hidden></p>
+      </div>
+      <div class="problema" id="prob-P3">
+        <p><strong>P3.</strong> Corredor com 1 migrante por geração: <i>F</i> e <i>F</i><sub>ST</sub> na geração 30.</p>
+        <div class="campos">
+          <div><label for="campo-P3a"><i>F</i> na geração 30</label><input type="text" inputmode="decimal" id="campo-P3a" data-campo="P3a" autocomplete="off"></div>
+          <div><label for="campo-P3b"><i>F</i><sub>ST</sub> na geração 30</label><input type="text" inputmode="decimal" id="campo-P3b" data-campo="P3b" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P3" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P4">
+        <p><strong>P4.</strong> Com o corredor, o <i>F</i><sub>ST</sub> para de subir, mas o <i>F</i> dentro dos fragmentos continua subindo, mais devagar. Por quê?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P4">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Os migrantes trazem alelos deletérios</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">O corredor junta os quatro fragmentos numa população de 40 micos, que ainda é pequena: a deriva continua</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">O corredor aumenta o cruzamento entre parentes</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">Foi azar desta rodada</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P5">
+        <p><strong>P5.</strong> Teste 0,1, 0,5, 1 e 5 migrantes por geração no corredor. Qual é o menor desses números que deixa o <i>F</i><sub>ST</sub> abaixo de 0,2 na geração 30?</p>
+        <div class="grupo-botoes" role="group" aria-label="P5">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">0,1</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">0,5</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">1</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">5</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="problema" id="prob-P6">
+        <p><strong>P6.</strong> Translocação de 3 micos por fragmento na geração 10, uma vez só (volte aos valores da prática): <i>F</i> dentro dos fragmentos logo antes (geração 9), logo depois (geração 10) e na geração 30. Use os atalhos embaixo de “Ler a geração”.</p>
+        <div class="campos">
+          <div><label for="campo-P6a">Geração 9</label><input type="text" inputmode="decimal" id="campo-P6a" data-campo="P6a" autocomplete="off"></div>
+          <div><label for="campo-P6b">Geração 10</label><input type="text" inputmode="decimal" id="campo-P6b" data-campo="P6b" autocomplete="off"></div>
+          <div><label for="campo-P6c">Geração 30</label><input type="text" inputmode="decimal" id="campo-P6c" data-campo="P6c" autocomplete="off"></div>
+        </div>
+        <p class="retorno" id="ret-P6" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P7">
+        <p><strong>P7.</strong> O que aconteceu depois da translocação única?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P7">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">O <i>F</i> ficou baixo para sempre</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">O <i>F</i> caiu na hora e depois voltou a subir: uma translocação só alivia por pouco tempo</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">O <i>F</i> caiu a zero</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">O <i>F</i><sub>ST</sub> aumentou na hora</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P8">
+        <p><strong>P8.</strong> Agora faça a translocação de 3 micos se repetir a cada 5 gerações. O que acontece com o <i>F</i><sub>ST</sub>?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P8">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Sobe sem parar, como nos isolados</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Cai a cada translocação e volta a subir entre uma e outra, sem disparar: fica perto do corredor</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Cai a zero e fica lá, porque os fragmentos ficam iguais</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P9">
+        <p><strong>P9.</strong> Volte aos valores da prática e mude só o <i>N</i> para 30 micos por fragmento. O que acontece com o <i>F</i> dos fragmentos isolados na geração 30?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P9">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Sobe bem menos: com mais micos, a deriva é mais fraca e a endogamia cresce mais devagar</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Fica igual: o <i>F</i> não depende do tamanho</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Sobe mais, porque há mais parentes</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-3">Próximo: os dados de União</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 3 -->
+    <section class="tela" id="tela-passo-3" aria-labelledby="titulo-passo-3">
+      <h2 id="titulo-passo-3">3. O que os dados mostram</h2>
+      <p class="horario">9h33 a 9h41</p>
+      <div class="quadro">
+        <h3>A translocação para a Reserva Biológica União</h3>
+        <p>Entre 1994 e 1997, os 42 micos-leões-dourados de seis grupos que viviam em quatro fragmentos de mata isolados foram levados para a Reserva Biológica União, com cerca de 2.500 ha. Moraes et al. (2017) genotiparam 239 micos em 14 microssatélites, em duas épocas, e compararam a população translocada com uma nativa, sem manejo, e com as reintroduzidas (micos nascidos em cativeiro e soltos na natureza).</p>
+        <div class="tabela-rolagem">
+          <table class="momentos">
+            <thead><tr><th>População</th><th>Época</th><th class="num">Coeficiente de endogamia (<i>F</i><sub>IS</sub>)</th></tr></thead>
+            <tbody>
+              <tr><td>Translocada (União)</td><td>1996 a 1997</td><td class="num">0,38</td></tr>
+              <tr><td>Translocada (União)</td><td>2007 a 2009</td><td class="num">0,03</td></tr>
+              <tr><td>Nativa, sem manejo</td><td>2007 a 2009</td><td class="num">0,29</td></tr>
+              <tr><td>Reintroduzidas</td><td>2007 a 2009</td><td class="num">0,13</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="pequeno suave">O <i>F</i><sub>IS</sub> mede a falta de heterozigotos dentro da população em relação ao esperado por Hardy-Weinberg, como o <i>F</i> = 1 − <i>H</i><sub>o</sub>/<i>H</i><sub>e</sub> de 27/10 (<i>H</i><sub>o</sub>, heterozigosidade observada; <i>H</i><sub>e</sub>, esperada). O <i>F</i> do simulador mede a perda de heterozigosidade em relação ao início. Os dois sobem com o cruzamento entre parentes. Na translocada, o tamanho efetivo estimado subiu de cerca de 3 (1997) para cerca de 14 (2009); os autores tratam esses valores como tendência. Fonte: Moraes et al. (2017), resumo e Tabela 1.</p>
+        <h3>A paisagem</h3>
+        <p>Moraes et al. (2018) genotiparam 201 micos para medir até onde eles se dispersam de fato, isto é, chegam a outro grupo e se reproduzem: micos aparentados aparecem a até cerca de 8 km uns dos outros. O pasto cobre cerca de 60% da paisagem e tem resistência média ao deslocamento (55, numa escala de 1 a 100); a rodovia BR-101 tem a resistência máxima (100). Os autores lembram que translocações e reintroduções ajudam, mas sozinhas não garantem a viabilidade da população a longo prazo, e sugerem enriquecer o pasto com árvores isoladas.</p>
+      </div>
+      <div class="pergunta" id="q-P10">
+        <p><strong>P10.</strong> Em 1996 a 1997, a amostra de União juntava micos de quatro fragmentos que ainda não tinham se misturado. Que efeito faz uma amostra assim mostrar falta de heterozigotos mesmo sem cruzamento entre parentes?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P10">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Efeito do fundador</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Efeito Wahlund: juntar numa só amostra grupos com frequências diferentes</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Seleção contra os heterozigotos</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">Mutação</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P11">
+        <p><strong>P11.</strong> Uma década depois, o <i>F</i><sub>IS</sub> caiu para 0,03. Que cenário do simulador isso lembra, e por quê?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P11">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Isolados: a deriva diminuiu a endogamia</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Translocação: os filhotes vêm de pais de fragmentos diferentes, e a população virou uma só</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Nenhum: a mutação criou os heterozigotos</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P12">
+        <p><strong>P12.</strong> Dois fragmentos estão a 3 km um do outro, separados por pasto. Outros dois, a 20 km, com a BR-101 no meio. O que fazer em cada caso?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P12">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">Corredor nos dois casos</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">Corredor (ou árvores no pasto) a 3 km; translocações repetidas, com monitoramento genético, a 20 km</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">Uma translocação só, nos dois casos</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">Nada: a deriva resolve sozinha</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-4">Próximo: fechamento</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 4 -->
+    <section class="tela" id="tela-passo-4" aria-labelledby="titulo-passo-4">
+      <h2 id="titulo-passo-4">4. Fechamento e registro</h2>
+      <p class="horario">9h41 a 9h45</p>
+      <ol class="mensagens">
+        <li>Num fragmento pequeno e fechado, todos ficam parentes: o <i>F</i> sobe a cada geração, e os fragmentos ficam diferentes entre si (o <i>F</i><sub>ST</sub> sobe junto).</li>
+        <li>Cerca de um migrante por geração já segura a diferença entre os fragmentos. Uma translocação só alivia por pouco tempo; repetida, faz o papel do corredor.</li>
+        <li>Em União, a translocação juntou micos de quatro fragmentos, e o coeficiente de endogamia caiu de 0,38 para 0,03. Para micos que se dispersam até cerca de 8 km, o corredor e a paisagem permeável mantêm o fluxo; a BR-101 é a barreira maior.</li>
+      </ol>
+      <div id="previsoes-volta"></div>
+
+      <div class="problema" id="prob-P13">
+        <p><strong>P13.</strong> Corredor ou translocação? Respondam à pergunta da prática em duas ou três frases, com um número do simulador ou dos artigos.</p>
+        <label for="campo-P13" class="visualmente-oculto">Resposta do P13</label>
+        <textarea id="campo-P13" rows="4" maxlength="1200"></textarea>
+      </div>
+
+      <p>O registro fica salvo neste aparelho. Copie ou baixe, se quiser guardar.</p>
+      <pre class="registro" id="registro-texto"></pre>
+      <div class="grupo-botoes acoes-registro">
+        <button type="button" class="principal" id="botao-copiar">Copiar o registro</button>
+        <button type="button" id="botao-baixar">Baixar como .txt</button>
+      </div>
+      <p id="msg-copiar" class="suave" aria-live="polite"></p>
+      <div class="nota">Das 9h45 às 10h35: oficina da Etapa 3 da Avaliação III (a figura da equipe), no roteiro. A ficha de saída fica aberta no Moodle das 10h35 às 10h55.</div>
+      <div class="rodape-passo">
+        <div id="recomecar-fim"></div>
+        <div class="direita"><button type="button" data-ir="#passo-1">Voltar ao início</button></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p><strong>Fontes.</strong> Moraes AM, Ruiz-Miranda CR, Ribeiro MC, Grativol AD, Carvalho CS, Dietz JM, Kierulff MCM, Freitas LA, Galetti PM Jr (2017) Temporal genetic dynamics of reintroduced and translocated populations of the endangered golden lion tamarin (<i>Leontopithecus rosalia</i>). Conservation Genetics 18(5):995-1009. doi:10.1007/s10592-017-0948-4. Moraes AM et al. (2018) Landscape resistance influences effective dispersal of endangered golden lion tamarins within the Atlantic Forest. Biological Conservation 224:178-187. doi:10.1016/j.biocon.2018.05.023.</p>
+    <p>Modelo: quatro fragmentos; em cada geração, primeiro a migração (uma fração <i>m</i> das cópias de cada fragmento passa a vir da média dos outros três; no corredor, <i>m</i> = migrantes/<i>N</i> em toda geração; na translocação, <i>m</i> = micos trocados/<i>N</i> só nas gerações escolhidas) e depois a deriva (Wright-Fisher, 2<i>N</i> cópias sorteadas com reposição). <i>H</i><sub>S</sub> = média de 1 − Σ<i>p</i><sub>i</sub>² nos fragmentos; <i>H</i><sub>T</sub> = 1 − Σ<i>p̄</i><sub>i</sub>²; <i>F</i> = 1 − <i>H</i><sub>S</sub>/<i>H</i><sub>0</sub>; <i>F</i><sub>ST</sub> = (<i>H</i><sub>T</sub> − <i>H</i><sub>S</sub>)/<i>H</i><sub>T</sub>; médias de 400 rodadas com semente fixa, para todos verem os mesmos números. As frequências iniciais do microssatélite são ilustrativas. BIOC10 Genética II, Instituto de Biologia, UFBA.</p>
+  </footer>
+</div>
+<script src="js/modelo.js"></script>
+<script src="js/grafico.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
