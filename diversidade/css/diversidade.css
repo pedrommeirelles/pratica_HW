@@ -1,0 +1,171 @@
+/* Inventário genético da onça: acréscimos à folha de estilo das práticas de 22/10 a 19/11 */
+
+.horario {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  margin: -0.3rem 0 0.6rem;
+}
+
+.rotulo-grupo {
+  font-weight: 600;
+  margin: 0.9rem 0 0.1rem;
+}
+
+/* Controles */
+.controle { margin: 0.4rem 0; }
+.controle label { margin-top: 0.3rem; }
+.controle output { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+input[type="range"] {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  accent-color: var(--azul-texto);
+  margin: 0;
+}
+
+.linha-ajuste {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.linha-ajuste input[type="range"] { flex: 1 1 auto; }
+.linha-ajuste button { flex: none; font-size: 1.2rem; font-weight: 700; }
+
+select {
+  font: inherit;
+  font-size: 1rem;
+  min-height: 44px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: 8px;
+  background: var(--papel);
+  color: var(--texto);
+  margin: 0.2rem 0 0.4rem;
+}
+
+.grupo-botoes button.escolha {
+  display: inline-block;
+  line-height: 1.35;
+  text-align: center;
+}
+.grupo-botoes.coluna { flex-direction: column; }
+.grupo-botoes.coluna button.escolha {
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+
+/* Cartas das onças */
+.cartas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.2rem, 1fr));
+  gap: 0.45rem;
+  margin: 0.6rem 0;
+}
+.carta {
+  border: 1px solid var(--borda-forte);
+  border-radius: 8px;
+  background: var(--papel);
+  padding: 0.35rem 0.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-height: 3.4rem;
+}
+.carta .id { font-size: 0.75rem; color: var(--texto-suave); }
+.carta .gen { font-size: 1rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.carta.vazia { border-style: dashed; color: var(--texto-suave); }
+.carta.vazia .gen { font-size: 0.85rem; }
+.carta.incompleta { border-style: dashed; }
+.carta.het { outline: 3px solid var(--laranja); outline-offset: -1px; }
+.al {
+  display: inline-block;
+  min-width: 2.4rem;
+  text-align: center;
+  padding: 0.05rem 0.3rem;
+  border-radius: 5px;
+  background: hsl(var(--h, 0), 62%, 38%);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.al.desconhecido { background: var(--destaque-fundo); color: var(--texto-suave); border: 1px dashed var(--borda-forte); }
+
+.marca {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0 0.25rem;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+.marca.r { background: var(--destaque-fundo); color: var(--texto); border: 1px solid var(--borda-forte); }
+.marca.p { background: var(--ok-fundo); color: var(--texto); border: 1px solid var(--azul); }
+
+table.momentos td.num, table.momentos th.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+table.momentos th[scope="row"] { font-weight: 600; text-align: left; }
+table.momentos tr.sub th { font-weight: 400; font-size: 0.75rem; color: var(--texto-suave); }
+table.momentos tfoot td { border-top: 2px solid var(--borda-forte); }
+
+/* Ranking */
+.barras .linha-barra { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.barras .linha-barra .barra-h { flex: 1 1 auto; min-width: 3rem; }
+.barra-h.ranking span { background: var(--azul-texto); }
+.barras .valor { min-width: 3.5rem; font-variant-numeric: tabular-nums; }
+
+.resultado p { margin: 0.4rem 0; }
+
+details.quadro summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 0.4rem; }
+
+/* Problemas */
+.problema, .pergunta {
+  border-top: 1px solid var(--borda);
+  padding-top: 0.4rem;
+  margin-top: 0.6rem;
+}
+.problema input[type="text"] { max-width: 10rem; }
+
+textarea {
+  font: inherit;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 6rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: 8px;
+  background: var(--papel);
+  color: var(--texto);
+  margin-top: 0.3rem;
+  resize: vertical;
+}
+
+.retorno {
+  background: var(--destaque-fundo);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.3rem 0 0.6rem;
+}
+
+ol.mensagens { padding-left: 1.4rem; }
+ol.mensagens li { margin: 0.5rem 0; font-size: 1.05rem; }
+
+#previsoes-volta:empty { display: none; }
+#previsoes-volta {
+  background: var(--papel);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  margin: 0.8rem 0;
+}
+#previsoes-volta h3 { margin-top: 0; }
+
+@media (max-width: 420px) {
+  .cartas { grid-template-columns: repeat(auto-fill, minmax(6.4rem, 1fr)); }
+  .carta .gen { font-size: 0.92rem; }
+  .al { min-width: 2.1rem; padding: 0.05rem 0.2rem; }
+}
+
+@media print {
+  .barra, .rodape-passo, #botao-projecao { display: none !important; }
+}

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prática de parâmetros de diversidade genética com genótipos reais de onças-pintadas da Mata Atlântica. BIOC10 Genética II, UFBA.">
+  <title>Inventário genético da onça · BIOC10</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/diversidade.css">
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <h1>Inventário genético da onça</h1>
+    <p class="subtitulo">Parâmetros de diversidade genética com 59 onças-pintadas da Mata Atlântica · BIOC10 Genética II · Prática de 26/11/2026</p>
+    <nav class="barra" aria-label="Passos da prática">
+      <ol id="lista-passos">
+        <li><a href="#passo-1" data-passo="1">1 Previsão</a></li>
+        <li><a href="#passo-2" data-passo="2">2 Alelos</a></li>
+        <li><a href="#passo-3" data-passo="3">3 Locos polimórficos</a></li>
+        <li><a href="#passo-4" data-passo="4">4 Heterozigosidade</a></li>
+        <li><a href="#passo-5" data-passo="5">5 Quem guarda mais</a></li>
+        <li><a href="#passo-6" data-passo="6">6 Fechamento</a></li>
+      </ol>
+      <button type="button" id="botao-projecao" class="pequeno" aria-pressed="false" title="Modo projeção: fonte maior">A+</button>
+    </nav>
+  </header>
+
+  <main id="principal">
+
+    <!-- Passo 1 -->
+    <section class="tela" id="tela-passo-1" aria-labelledby="titulo-passo-1">
+      <h2 id="titulo-passo-1">1. Sua previsão</h2>
+      <p class="horario">9h00 a 9h05, cada um, sem conversar</p>
+      <p>A onça-pintada (<i>Panthera onca</i>) vive hoje em pedaços isolados de Mata Atlântica. Haag et al. (2010) genotiparam 59 onças de quatro áreas do Alto Paraná e de Misiones (Argentina) em 13 microssatélites. Hoje você faz o inventário genético dessas onças: conta alelos, procura os raros, mede a heterozigosidade e decide qual área guarda mais diversidade. As contas ficam com o aplicativo; você prevê, explora, compara e interpreta.</p>
+      <div class="tabela-rolagem">
+        <table class="momentos">
+          <thead><tr><th>Área</th><th class="num">Onças</th><th>Onde e tamanho</th><th>Amostras</th></tr></thead>
+          <tbody id="tabela-areas"></tbody>
+        </table>
+      </div>
+      <p class="pequeno suave">Fonte: Haag et al. (2010), Métodos. Os problemas têm os mesmos números aqui e no roteiro (P1 a P13).</p>
+
+      <h3>a) Qual área guarda mais diversidade genética de onça?</h3>
+      <div class="grupo-botoes coluna" role="group" aria-label="Previsão a" id="botoes-prev-a">
+        <button type="button" class="escolha" data-valor="Corredor Verde" aria-pressed="false">Corredor Verde</button>
+        <button type="button" class="escolha" data-valor="Morro do Diabo" aria-pressed="false">Morro do Diabo</button>
+        <button type="button" class="escolha" data-valor="Ivinhema" aria-pressed="false">Ivinhema</button>
+        <button type="button" class="escolha" data-valor="Porto Primavera" aria-pressed="false">Porto Primavera</button>
+      </div>
+
+      <h3>b) Que medida você usaria para decidir?</h3>
+      <div class="grupo-botoes coluna" role="group" aria-label="Previsão b" id="botoes-prev-b">
+        <button type="button" class="escolha" data-valor="A" aria-pressed="false">Número médio de alelos por loco</button>
+        <button type="button" class="escolha" data-valor="P" aria-pressed="false">Porcentagem de locos polimórficos</button>
+        <button type="button" class="escolha" data-valor="Ho" aria-pressed="false">Heterozigosidade observada (proporção de heterozigotos)</button>
+        <button type="button" class="escolha" data-valor="He" aria-pressed="false">Heterozigosidade esperada (pelas frequências dos alelos)</button>
+      </div>
+      <p id="eco-previsao" class="suave" aria-live="polite"></p>
+
+      <label for="campo-nome">Seu nome (opcional, entra no registro)</label>
+      <input type="text" id="campo-nome" autocomplete="off" maxlength="80">
+
+      <div class="rodape-passo">
+        <div id="recomecar-tudo"></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-2">Próximo: contar alelos</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 2 -->
+    <section class="tela" id="tela-passo-2" aria-labelledby="titulo-passo-2">
+      <h2 id="titulo-passo-2">2. Contar alelos</h2>
+      <p class="horario">9h05 a 9h25</p>
+      <p>Cada carta é uma onça, com o genótipo dela no loco escolhido: os dois números são os tamanhos dos dois alelos do microssatélite (em pares de bases). Mesma cor, mesmo alelo. Carta "sem resultado": a amostra não deu genótipo nesse loco. Carta com "?": só um alelo apareceu (amostras de fezes, pele ou pelo); o artigo não usa essas cartas nas contas, e o aplicativo também não.</p>
+
+      <div class="quadro">
+        <p class="rotulo-grupo">Área</p>
+        <div class="grupo-botoes" role="group" aria-label="Área das cartas" id="botoes-cartas-frag"></div>
+        <label for="sel-cartas-loco">Loco</label>
+        <select id="sel-cartas-loco"></select>
+        <div class="cartas" id="cartas-alelos" aria-live="polite"></div>
+        <div class="grupo-botoes"><button type="button" id="botao-contagem" aria-expanded="false">Mostrar a contagem dos alelos</button></div>
+        <div id="caixa-contagem" hidden></div>
+      </div>
+
+      <div class="problema" id="prob-P1">
+        <p><strong>P1.</strong> Escolha Morro do Diabo e o loco F42. Quantos alelos diferentes há nas 8 onças?</p>
+        <label for="campo-P1" class="visualmente-oculto">Resposta do P1</label>
+        <input type="text" id="campo-P1" data-campo="P1" inputmode="numeric" autocomplete="off">
+        <p class="retorno" id="ret-P1" hidden></p>
+      </div>
+      <div class="problema" id="prob-P2">
+        <p><strong>P2.</strong> Agora o Corredor Verde, no mesmo F42 (18 onças, uma sem resultado). Quantos alelos diferentes?</p>
+        <label for="campo-P2" class="visualmente-oculto">Resposta do P2</label>
+        <input type="text" id="campo-P2" data-campo="P2" inputmode="numeric" autocomplete="off">
+        <p class="retorno" id="ret-P2" hidden></p>
+      </div>
+
+      <h3>Os 13 locos: número de alelos por loco e a média (<i>A</i>)</h3>
+      <p>O aplicativo conta os alelos de todos os locos. <strong>Alelo raro:</strong> frequência abaixo de 5% no fragmento. <strong>Alelo privado:</strong> aparece num fragmento só.</p>
+      <div class="tabela-rolagem"><table class="momentos" id="tabela-A"></table></div>
+
+      <div class="pergunta" id="q-P3">
+        <p><strong>P3.</strong> Morro do Diabo e Ivinhema não têm nenhum alelo abaixo de 5%. Por quê?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P3">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) A deriva já eliminou todos os alelos raros dessas áreas</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Com 8 onças há 16 cópias: um alelo visto uma vez já tem 1/16 = 6,25%; com 10 onças, 1/20 = 5%, que não fica abaixo de 5%</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Os microssatélites não têm alelos raros</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <h3>O tamanho da amostra pesa: sorteie onças</h3>
+      <p>O Porto Primavera tem 23 onças; o Morro do Diabo, 8. Quantos alelos você acharia no Porto Primavera se tivesse amostrado só 8?</p>
+      <div class="quadro">
+        <p class="rotulo-grupo">Área</p>
+        <div class="grupo-botoes" role="group" aria-label="Área do sorteio" id="botoes-sorteio-frag"></div>
+        <div class="controle">
+          <label for="s-k">Onças sorteadas: <output id="s-k-valor"></output></label>
+          <div class="linha-ajuste">
+            <button type="button" class="pequeno" id="s-k-menos" aria-label="Menos onças">−</button>
+            <input type="range" id="s-k" min="2" max="23" step="1">
+            <button type="button" class="pequeno" id="s-k-mais" aria-label="Mais onças">+</button>
+          </div>
+        </div>
+        <div class="grupo-botoes">
+          <button type="button" class="principal" id="botao-sortear">Sortear as onças</button>
+          <button type="button" id="botao-mil">Fazer 1.000 sorteios</button>
+        </div>
+        <div id="resultado-sorteio" class="resultado" aria-live="polite"></div>
+      </div>
+
+      <div class="pergunta" id="q-P4">
+        <p><strong>P4.</strong> Sorteie 8 onças do Porto Primavera algumas vezes e depois faça 1.000 sorteios. O que acontece com <i>A</i>, e como o artigo compara áreas com amostras de tamanhos diferentes?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P4">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) <i>A</i> não muda: o número de alelos não depende de quantas onças se amostra</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) <i>A</i> cai de 5,54 para perto de 4,5: com menos onças, alelos pouco comuns ficam de fora. O artigo usa a riqueza alélica (<i>A</i><sub>R</sub>), o número de alelos esperado numa amostra de 8 onças, o tamanho do menor fragmento</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) <i>A</i> sobe, porque o sorteio cria alelos novos</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <h3>Riqueza alélica: todos com 8 onças</h3>
+      <div class="tabela-rolagem"><table class="momentos" id="tabela-AR"></table></div>
+
+      <details class="quadro" id="desafio">
+        <summary><strong>Desafio (se der tempo):</strong> o artigo dá <i>A</i><sub>R</sub> = 4,2 para Ivinhema</summary>
+        <p>Com 8 onças, a conta dá 4,10 para Ivinhema e bate com o artigo nos outros três fragmentos. Mude o número de onças da rarefação e ache o valor que dá 4,2.</p>
+        <div class="controle">
+          <label for="s-rar">Onças na rarefação: <output id="s-rar-valor"></output></label>
+          <div class="linha-ajuste">
+            <button type="button" class="pequeno" id="s-rar-menos" aria-label="Menos onças">−</button>
+            <input type="range" id="s-rar" min="2" max="9" step="1">
+            <button type="button" class="pequeno" id="s-rar-mais" aria-label="Mais onças">+</button>
+          </div>
+        </div>
+        <div class="tabela-rolagem"><table class="momentos" id="tabela-rar"></table></div>
+        <label for="campo-D">Com quantas onças Ivinhema dá 4,2?</label>
+        <input type="text" id="campo-D" data-campo="D" inputmode="numeric" autocomplete="off">
+        <p class="retorno" id="ret-D" hidden></p>
+      </details>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-3">Próximo: locos polimórficos</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 3 -->
+    <section class="tela" id="tela-passo-3" aria-labelledby="titulo-passo-3">
+      <h2 id="titulo-passo-3">3. Locos polimórficos (<i>P</i>)</h2>
+      <p class="horario">9h25 a 9h35</p>
+      <p>Um loco é <strong>polimórfico</strong> quando o alelo mais comum não passa de 95% (ou de 99%, conforme o critério). <i>P</i> é a porcentagem de locos polimórficos entre os analisados.</p>
+      <div class="quadro">
+        <p class="rotulo-grupo">Critério</p>
+        <div class="grupo-botoes" role="group" aria-label="Critério de polimorfismo" id="botoes-criterio">
+          <button type="button" class="escolha" data-valor="95" aria-pressed="false">95%</button>
+          <button type="button" class="escolha" data-valor="99" aria-pressed="false">99%</button>
+        </div>
+        <div class="tabela-rolagem"><table class="momentos" id="tabela-P"></table></div>
+        <p class="rotulo-grupo">Morro do Diabo, loco FCA741</p>
+        <div class="cartas" id="cartas-741"></div>
+      </div>
+
+      <div class="pergunta" id="q-P5">
+        <p><strong>P5.</strong> No Morro do Diabo, <i>P</i> = 92,3% (12 de 13). O que aconteceu no FCA741?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P5">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) O loco não amplificou nas onças do Morro do Diabo</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) As 8 onças são 179/179: um alelo só, o loco está fixado nessa amostra</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) O loco tem heterozigotos demais</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="quadro">
+        <h3>Araucária: isoenzimas em vez de microssatélites</h3>
+        <p>Auler et al. (2002) estudaram a araucária (<i>Araucaria angustifolia</i>) em Santa Catarina com 15 locos de isoenzimas, em 9 populações e 328 árvores, e compararam populações mais conservadas com populações de áreas degradadas. Critério de 95%.</p>
+        <div class="tabela-rolagem"><table class="momentos" id="tabela-araucaria"></table></div>
+      </div>
+
+      <div class="pergunta" id="q-P6">
+        <p><strong>P6.</strong> Na araucária, <i>P</i> separa as populações conservadas (43,3%) das degradadas (20,0%). Nas onças, <i>P</i> fica em 100% em três áreas. Por quê?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P6">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) As onças não perderam diversidade</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Nas isoenzimas, muitos locos têm um alelo só, e perder alelos vira perder locos polimórficos; os microssatélites têm muitos alelos por loco e quase nunca ficam com um só</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) O critério de 95% só vale para plantas</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-4">Próximo: heterozigosidade</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 4 -->
+    <section class="tela" id="tela-passo-4" aria-labelledby="titulo-passo-4">
+      <h2 id="titulo-passo-4">4. Heterozigosidade e <i>F</i><sub>IS</sub></h2>
+      <p class="horario">9h35 a 9h55</p>
+      <p><i>H</i><sub>o</sub>, a heterozigosidade observada, é a proporção de onças heterozigotas. <i>H</i><sub>e</sub>, a esperada, é a proporção de heterozigotos que Hardy-Weinberg prevê pelas frequências dos alelos: 1 − Σ<i>p</i><sub>i</sub>², multiplicado por 2<i>n</i>/(2<i>n</i> − 1) para corrigir o efeito de amostras pequenas (<i>n</i> onças). <i>F</i><sub>IS</sub> = 1 − <i>H</i><sub>o</sub>/<i>H</i><sub>e</sub>, o <i>F</i> da aula de 27/10.</p>
+      <div class="quadro">
+        <p class="rotulo-grupo">Área</p>
+        <div class="grupo-botoes" role="group" aria-label="Área das cartas de heterozigosidade" id="botoes-het-frag"></div>
+        <label for="sel-het-loco">Loco</label>
+        <select id="sel-het-loco"></select>
+        <div class="grupo-botoes"><button type="button" id="botao-destacar" aria-pressed="false">Destacar os heterozigotos</button></div>
+        <div class="cartas" id="cartas-het"></div>
+        <div id="contas-het" class="resultado"></div>
+      </div>
+
+      <div class="problema" id="prob-P7">
+        <p><strong>P7.</strong> Morro do Diabo, loco F53: quantas das 8 onças são heterozigotas?</p>
+        <label for="campo-P7" class="visualmente-oculto">Resposta do P7</label>
+        <input type="text" id="campo-P7" data-campo="P7" inputmode="numeric" autocomplete="off">
+        <p class="retorno" id="ret-P7" hidden></p>
+      </div>
+
+      <h3>Os 13 locos: médias por área</h3>
+      <div class="tabela-rolagem"><table class="momentos" id="tabela-H"></table></div>
+      <p class="pequeno suave"><i>N</i><sub>e</sub>: tamanho efetivo estimado por Haag et al. (2010) pelo desequilíbrio de ligação (LDNE), com o intervalo de 95%.</p>
+
+      <div class="pergunta" id="q-P8">
+        <p><strong>P8.</strong> Em qual área faltam heterozigotos em relação ao esperado (<i>F</i><sub>IS</sub> positivo)?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P8">
+          <button type="button" class="escolha" data-valor="Corredor Verde" aria-pressed="false">Corredor Verde</button>
+          <button type="button" class="escolha" data-valor="Morro do Diabo" aria-pressed="false">Morro do Diabo</button>
+          <button type="button" class="escolha" data-valor="Ivinhema" aria-pressed="false">Ivinhema</button>
+          <button type="button" class="escolha" data-valor="Porto Primavera" aria-pressed="false">Porto Primavera</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P9">
+        <p><strong>P9.</strong> O que pode explicar a falta de heterozigotos no Corredor Verde?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P9">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) Efeito Wahlund: a amostra junta onças de uma área de 1,1 milhão de ha, coletadas ao longo de 15 anos</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Falha da genotipagem: em amostras de fezes, pele e pelo, um dos alelos pode não aparecer, e o heterozigoto passa por homozigoto (as 13 cartas com "?" são todas do Corredor Verde)</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Seleção a favor dos homozigotos</button>
+          <button type="button" class="escolha" data-valor="d" aria-pressed="false">(d) As hipóteses (a) e (b): as duas são plausíveis, e os dados desta prática não decidem entre elas</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+      <div class="pergunta" id="q-P10">
+        <p><strong>P10.</strong> Nas três áreas do Alto Paraná, <i>F</i><sub>IS</sub> é negativo: sobram heterozigotos. O que isso indica?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P10">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) Que essas populações estão geneticamente saudáveis</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Que poucos pais geraram as onças da amostra (<i>N</i><sub>e</sub> pequeno): por acaso, as frequências dos alelos diferem entre os pais e as mães, e os filhotes nascem com heterozigotos a mais, como no mico-leão-preto de 29/10</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Que a mutação está criando heterozigotos</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-5">Próximo: quem guarda mais</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 5 -->
+    <section class="tela" id="tela-passo-5" aria-labelledby="titulo-passo-5">
+      <h2 id="titulo-passo-5">5. Quem guarda mais diversidade?</h2>
+      <p class="horario">9h55 a 10h15</p>
+      <p>Escolha a medida e veja a ordem das quatro áreas.</p>
+      <div class="quadro">
+        <div class="grupo-botoes" role="group" aria-label="Medida do ranking" id="botoes-medida"></div>
+        <div class="barras" id="barras-ranking"></div>
+        <p id="texto-ranking" class="suave" aria-live="polite"></p>
+      </div>
+
+      <div class="pergunta" id="q-P11">
+        <p><strong>P11.</strong> Em que medida o Porto Primavera fica em primeiro, e por que, na <i>H</i><sub>e</sub>, ele fica atrás do Corredor Verde?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P11">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) Em <i>A</i>; o Corredor Verde tem mais onças na amostra</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Em <i>H</i><sub>o</sub>; no Corredor Verde faltam heterozigotos (<i>F</i><sub>IS</sub> positivo) e no Porto Primavera sobram (<i>F</i><sub>IS</sub> negativo), então a <i>H</i><sub>o</sub> inverte a ordem que a <i>H</i><sub>e</sub>, <i>A</i> e <i>A</i><sub>R</sub> mostram</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Em <i>P</i>; os outros têm locos fixados</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <h3>Seus números contra a Tabela 1 do artigo</h3>
+      <div class="tabela-rolagem"><table class="momentos" id="tabela-artigo"></table></div>
+      <p class="pequeno suave">Diferenças: a <i>H</i><sub>e</sub> do artigo é a do programa FSTAT, que além da correção do tamanho da amostra desconta a <i>H</i><sub>o</sub> (Nei 1987); a diferença para a deste aplicativo é de 0,005 no máximo. A <i>A</i><sub>R</sub> de Ivinhema (4,2 no artigo) é o desafio do Passo 2. Os alelos privados do artigo são rarefeitos a 8 onças: <span id="privados-artigo"></span>.</p>
+
+      <div class="quadro">
+        <h3>A história de cada área</h3>
+        <ul id="lista-historia"></ul>
+      </div>
+
+      <div class="pergunta" id="q-P12">
+        <p><strong>P12.</strong> O Porto Primavera tem a maior <i>H</i><sub>o</sub>, mas o artigo considera essa população extinta: o reservatório alagou 220 mil ha em 1998, e a última onça com colar foi achada morta em 2003. O que isso ensina sobre medir diversidade?</p>
+        <div class="grupo-botoes coluna" role="group" aria-label="P12">
+          <button type="button" class="escolha" data-valor="a" aria-pressed="false">(a) Que o artigo errou: população diversa não se extingue</button>
+          <button type="button" class="escolha" data-valor="b" aria-pressed="false">(b) Que a diversidade de uma amostra conta a história dos pais e avós (aqui, de antes do lago); sem habitat, a população some antes que a diversidade caia</button>
+          <button type="button" class="escolha" data-valor="c" aria-pressed="false">(c) Que o lago aumentou a diversidade genética das onças</button>
+        </div>
+        <p class="retorno" hidden></p>
+      </div>
+
+      <div class="rodape-passo">
+        <div></div>
+        <div class="direita"><button type="button" class="principal" data-ir="#passo-6">Próximo: fechamento</button></div>
+      </div>
+    </section>
+
+    <!-- Passo 6 -->
+    <section class="tela" id="tela-passo-6" aria-labelledby="titulo-passo-6">
+      <h2 id="titulo-passo-6">6. Fechamento e registro</h2>
+      <p class="horario">10h15 a 10h25</p>
+      <ol class="mensagens">
+        <li>A resposta depende da medida: a <i>H</i><sub>o</sub> põe o Porto Primavera em primeiro; <i>A</i>, <i>A</i><sub>R</sub>, <i>H</i><sub>e</sub>, alelos raros e alelos privados põem o Corredor Verde. O Morro do Diabo fica em último em todas.</li>
+        <li><i>A</i> e os alelos raros dependem do tamanho da amostra: compare áreas pela riqueza alélica (<i>A</i><sub>R</sub>). <i>P</i> só separa populações com marcadores que têm locos de um alelo só, como as isoenzimas da araucária.</li>
+        <li><i>F</i><sub>IS</sub> compara <i>H</i><sub>o</sub> com <i>H</i><sub>e</sub>. Positivo (faltam heterozigotos): Wahlund ou falha de genotipagem. Negativo (sobram): poucos pais, <i>N</i><sub>e</sub> pequeno, e não população saudável.</li>
+      </ol>
+      <div id="previsoes-volta"></div>
+
+      <div class="problema" id="prob-P13">
+        <p><strong>P13.</strong> Qual área guarda mais diversidade genética de onça? Responda em duas frases, com a medida que você escolheu, um número e por que essa medida.</p>
+        <label for="campo-P13" class="visualmente-oculto">Resposta do P13</label>
+        <textarea id="campo-P13" rows="4" maxlength="1200"></textarea>
+      </div>
+
+      <div class="nota">Em 03/12: a diferença entre as áreas (<i>F</i><sub>ST</sub>, distância genética) e o que fazer com elas (manejo). Os alelos privados do Corredor Verde já dão uma pista.</div>
+
+      <p>O registro fica salvo neste aparelho. Copie ou baixe, se quiser guardar.</p>
+      <pre class="registro" id="registro-texto"></pre>
+      <div class="grupo-botoes acoes-registro">
+        <button type="button" class="principal" id="botao-copiar">Copiar o registro</button>
+        <button type="button" id="botao-baixar">Baixar como .txt</button>
+        <a class="botao" id="botao-ficha" href="#" target="_blank" rel="noopener" hidden>Abrir a ficha de saída no Moodle</a>
+      </div>
+      <p id="msg-copiar" class="suave" aria-live="polite"></p>
+      <div class="nota">Ficha de saída no Moodle, das 10h20 às 10h45. Das 10h25 às 10h40: equipes da Avaliação III, plano do rascunho (Etapa 4). Os números calculados nesta prática não contam como dado real de nenhum post.</div>
+      <div class="rodape-passo">
+        <div id="recomecar-fim"></div>
+        <div class="direita"><button type="button" data-ir="#passo-1">Voltar ao início</button></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p><strong>Fontes.</strong> <span id="fonte-haag"></span> <span id="fonte-auler"></span></p>
+    <p>Contas: genótipos completos de cada loco (sem resultado e incompletos ficam de fora); <i>A</i>, média de alelos por loco; alelo raro, frequência abaixo de 5%; alelo privado, presente num fragmento só; <i>A</i><sub>R</sub>, rarefação de El Mousadik e Petit (1996) a 16 cópias (8 onças); <i>P</i>, locos com o alelo mais comum até 95% ou 99%; <i>H</i><sub>o</sub>, proporção de heterozigotos; <i>H</i><sub>e</sub> = 2<i>n</i>/(2<i>n</i> − 1) × (1 − Σ<i>p</i><sub>i</sub>²), por loco; médias dos 13 locos; <i>F</i><sub>IS</sub> = 1 − <i>H</i><sub>o</sub>/<i>H</i><sub>e</sub> com as médias. Sorteios com semente fixa: todos os aparelhos veem os mesmos números no primeiro sorteio. BIOC10 Genética II, Instituto de Biologia, UFBA.</p>
+  </footer>
+</div>
+<script src="js/genotipos.js"></script>
+<script src="js/dados.js"></script>
+<script src="js/modelo.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
